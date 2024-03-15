@@ -1,0 +1,31 @@
+.coolbg{
+    background-image: url("../images/wave2.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 450px;
+}
+
+
+.sem{
+    padding: 12px;
+    border-radius: 10%;
+    color: #1e2a45;
+    border:  4px solid #1e2a457a;
+}
+
+.sem:active{
+    background-color: #4c9d55a7;
+    transition: all 0.3s;
+}
+.sem .active{
+    background-color: #69b672;
+    border: 3px solid #52da6b;
+    transition: all 0.3s ease-in-out;
+}
+
+.sem:hover{
+    transition: all 0.3s;
+    background-color: #4c649da7;
+    color: white;
+    border:  4px solid #1e2a4591;
+}

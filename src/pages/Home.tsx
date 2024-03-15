@@ -63,11 +63,11 @@ function Home() {
                     <motion.div
                         initial={{ y: -100 }}
                         animate={{ y: 0 }}
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: 0.3 }}  
                         className="decription font-mono drop-shadow-xl top-0 invisible md:visible mx-16 text-sm md:text-md flex text-center z-10 text-[#387ADF]"
 
 
-                        style={{ border: "2px solid #387ADF", borderRadius: "10px", padding: "10px", y: bgY }}
+                        style={{ border: "2px solid #387ADF", borderRadius: "10px", padding: "10px", y: bgY , backgroundColor:"white"}}
                     >
                         <p>
                             "Explore the digital haven for CSE enthusiasts at GIT!

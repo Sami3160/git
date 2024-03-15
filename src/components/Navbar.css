@@ -11,7 +11,7 @@
 
     background-color: rgb(197, 219, 219);
     opacity: 0.8;
-
+    z-index: 20;
     box-shadow: 0 2px 20px black;
 }
 

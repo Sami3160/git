@@ -16,7 +16,7 @@ function Navbar(){
                 </div>
                 <ul className="col-span-2 list-none flex flex-row space-x-0 lg:space-x-16 opacity-1 md:opacity-1 justify-center items-center text-grey-800">
                     <li className="link cursor-pointer">
-                        <NavLink to={''}>
+                        <NavLink to={'/notes'}>
                         Search Notes
                         </NavLink>
                     </li>
