@@ -42,9 +42,11 @@ function NotesArea() {
             </div>
 
             <div className=" bg-[#1e2a45]  p-0 sm:p-8 md:p-16">
-                <div className="content grid grid-cols-4 grid-rows-1 md:grid-rows-4 md:grid-cols-1">
-                    <div className="head col-span-1 p-3 flex sm:justify-center  bg-blue-300 rounded-xl w-full" ref={head}>
-                        <div className="data relative grid grid-rows-8 grid-cols-1 md:grid-cols-8 md:grid-rows-1 text-sm space-y-2 md:space-x-3 lg:space-x-10">
+                <div className="content grid grid-cols-4 grid-rows-1 md:grid-rows-4 md:grid-cols-1 md:p-2" >
+                    <div className="head col-span-1 p-3 flex sm:justify-center  bg-blue-300 rounded-xl w-full mr-2 md:mx-0 md:my-2" ref={head}>
+                        <div className="data relative items-center justify-center
+                        grid grid-rows-8 grid-cols-1 md:grid-cols-8 md:grid-rows-1 
+                        text-sm space-y-2 md:space-x-3 lg:space-x-10">
                             <motion.div
                                 whileTap={{ scale: 1.2, color: '#000000' }}
                                 onClick={handleSem}
@@ -105,7 +107,7 @@ function NotesArea() {
 
                         </div>
                     </div>
-                    <div className="cardArea col-span-3  relative bg-slate-200 opacity-85 rounded-lg">
+                    <div className="cardArea col-span-3 md:row-span-3 relative bg-slate-200 opacity-85 shadow-inner rounded-lg">
                         <div className="close absolute top-1/2 left-0 text-white   sm:hidden" onClick={onHideClick}>
                             <FontAwesomeIcon icon={faArrowCircleLeft} className="h-6 w-6" />
                         </div>

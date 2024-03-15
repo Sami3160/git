@@ -6,6 +6,10 @@
 }
 
 
+.content{
+    background-color: rgba(73, 192, 232, 0.267);
+}
+
 .sem{
     padding: 12px;
     border-radius: 10%;
@@ -26,6 +30,5 @@
 .sem:hover{
     transition: all 0.3s;
     background-color: #4c649da7;
-    color: white;
     border:  4px solid #1e2a4591;
 }

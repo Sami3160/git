@@ -63,11 +63,11 @@ function Home() {
                     <motion.div
                         initial={{ y: -100 }}
                         animate={{ y: 0 }}
-                        transition={{ duration: 0.3 }}  
+                        transition={{ duration: 0.3 }}
                         className="decription font-mono drop-shadow-xl top-0 invisible md:visible mx-16 text-sm md:text-md flex text-center z-10 text-[#387ADF]"
 
 
-                        style={{ border: "2px solid #387ADF", borderRadius: "10px", padding: "10px", y: bgY , backgroundColor:"white"}}
+                        style={{ border: "2px solid #387ADF", borderRadius: "10px", padding: "10px", y: bgY, backgroundColor: "white" }}
                     >
                         <p>
                             "Explore the digital haven for CSE enthusiasts at GIT!
@@ -104,22 +104,25 @@ function Home() {
             {/* special button */}
             <motion.div className="special w-full my-10 flex flex-col justify-center items-center" >
 
-                <div className="button mx-auto">
-                    <motion.a
-                        initial={{ x: -200, scale: 0.5 }}
-                        whileHover={{ scale: 1.3, boxShadow: "0px 0px 10px 0px #387ADF" }}
-                        whileInView={{ x: 0, scale: 1 }}
-                        // viewport={{ once: true }}
-                        transition={{ duration: 0.5, type: 'spring', stiffness: 100, damping: 10 }}
-                        href="#_" className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
-                        <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <FontAwesomeIcon icon={faBook} />  </svg>
-                        </span>
-                        <span className="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease" >Visit Notes</span>
-                        <span className="relative invisible">Visi   t Notes</span>
-                    </motion.a>
+                <NavLink to={"/notes"}>
 
-                </div>
+                    <div className="button mx-auto">
+                        <motion.a
+                            initial={{ x: -200, scale: 0.5 }}
+                            whileHover={{ scale: 1.3, boxShadow: "0px 0px 10px 0px #387ADF" }}
+                            whileInView={{ x: 0, scale: 1 }}
+                            transition={{ duration: 0.5, type: 'spring', stiffness: 100, damping: 10 }}
+                            href="#_" className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
+                            <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <FontAwesomeIcon icon={faBook} />  </svg>
+                            </span>
+                            <span className="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease" > Visit Notes</span>
+                            <span className="relative invisible">Visit Notes</span>
+                        </motion.a>
+
+                    </div>
+                </NavLink>
+
             </motion.div>
 
 
@@ -143,7 +146,12 @@ function Home() {
                         // style={{ y: card }}
                         className="card col-span-1 w-full h-56  p-2 z-10">
                         <div className="cardContent p-2 shadow-xl mx-auto sm:mx-0 md:mx-auto rounded-lg w-[50%] sm:w-full md:w-[70%] h-full bg-[#50C4ED] border-[8px] opacity-[0.7] border-[#387ADF]">
-                            <h1></h1>
+                            <div className="title text-2xl  text-center">Total Semesters</div>
+                            <div className="title text-6xl flex text-center h-[70%] justify-center items-center font-extrabold">
+                                <p>
+                                    4
+                                </p>
+                            </div>
                         </div>
                     </motion.div>
                     <motion.div
@@ -152,6 +160,12 @@ function Home() {
                         transition={{ duration: 0.5, type: 'spring', stiffness: 100, damping: 10, delay: 0.2 }}
                         className="card col-span-1 w-full h-56 p-2 z-10">
                         <div className="cardContent p-2 shadow-xl mx-auto sm:mx-0 md:mx-auto rounded-lg w-[50%] sm:w-full md:w-[70%] h-full bg-[#50C4ED] border-[8px] opacity-[0.7] border-[#387ADF]">
+                            <div className="title text-2xl  text-center">Total Question</div>
+                            <div className="title text-6xl flex text-center h-[70%] justify-center items-center font-extrabold">
+                                <p>
+                                    49
+                                </p>
+                            </div>
                         </div>
                     </motion.div>
                     <motion.div
@@ -160,7 +174,12 @@ function Home() {
                         transition={{ duration: 0.5, type: 'spring', stiffness: 100, damping: 10, delay: 0.6 }}
                         className="card col-span-1 w-full h-56  p-2 z-10">
                         <div className="cardContent p-2 shadow-xl mx-auto  sm:mx-0 md:mx-auto rounded-lg w-[50%] sm:w-full md:w-[70%] h-full bg-[#50C4ED] border-[8px] opacity-[0.7] border-[#387ADF]">
-
+                            <div className="title text-2xl  text-center">Total Notes</div>
+                            <div className="title text-6xl flex text-center h-[70%] justify-center items-center font-extrabold">
+                                <p>
+                                    100
+                                </p>
+                            </div>
                         </div>
                     </motion.div>
                 </motion.div>
@@ -175,12 +194,12 @@ function Home() {
                         <div className='h-auto w-[34rem] '>
                             <img src={temp} alt="" />
                         </div>
-                        <div className='text-4xl '>The Gharda Institute Of Technolygy...</div>
+                        <div className='text-xl md:text-4xl '>The Gharda Institute Of Technolygy...</div>
                     </div>
 
 
                     <div className="cardType2 flex flex-row justify-between items-center ">
-                        <div className='text-4xl '>The Gharda Institute Of Technolygy...</div>
+                        <div className='text-xl md:text-4xl '>The Gharda Institute Of Technolygy...</div>
                         <div className='h-auto w-[34rem] '>
                             <img src={temp} alt="" />
                         </div>
@@ -191,12 +210,12 @@ function Home() {
                         <div className='h-auto w-[34rem] '>
                             <img src={temp} alt="" />
                         </div>
-                        <div className='text-4xl '>The Gharda Institute Of Technolygy...</div>
+                        <div className='text-xl md:text-4xl '>The Gharda Institute Of Technolygy...</div>
                     </div>
 
 
                     <div className="cardType2 flex flex-row justify-between items-center ">
-                        <div className='text-4xl '>The Gharda Institute Of Technolygy...</div>
+                        <div className='text-xl md:text-4xl '>The Gharda Institute Of Technolygy...</div>
                         <div className='h-auto w-[34rem] '>
                             <img src={temp} alt="" />
                         </div>
