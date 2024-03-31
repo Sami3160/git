@@ -15,11 +15,11 @@ function NotesArea() {
         }
         setHeadOpen(state => !state);
     }
-    function handleSem(context: any): void {
-        let choice: string = context.target.innerText;
+    function handleSem(eleContext: any): void {
+        let choice: string = eleContext.target.innerText;
         console.log(choice);
         let list = document.querySelector('.data');
-        context.target.setAttribute("className", ".active")
+        eleContext.target.setAttribute("className", ".active")
         if (list) {
             for (let ele of list.children as any) {
                 ele.removeAttribute(".active");
@@ -43,10 +43,12 @@ function NotesArea() {
 
             <div className=" bg-[#1e2a45]  p-0 sm:p-8 md:p-16">
                 <div className="content grid grid-cols-4 grid-rows-1 md:grid-rows-4 md:grid-cols-1 md:p-2" >
-                    <div className="head col-span-1 p-3 flex sm:justify-center  bg-blue-300 rounded-xl w-full mr-2 md:mx-0 md:my-2" ref={head}>
-                        <div className="data relative items-center justify-center
+                    <div className="head semList col-span-1 p-3 h-fit flex flex-col  space-y-2 justify-between items-center 
+                    text-xm md:text-lg text-xs sm:text-sm md:font-extrabold 
+                    md:items-end md:flex-row bg-blue-300 sm:rounded-xl md:my-3" ref={head}>
+                        {/* <div className="semList relative items-center justify-start
                         grid grid-rows-8 grid-cols-1 md:grid-cols-8 md:grid-rows-1 
-                        text-sm space-y-2 md:space-x-3 lg:space-x-10">
+                        text-sm space-y-2 md:space-x-3 lg:space-x-10"> */}
                             <motion.div
                                 whileTap={{ scale: 1.2, color: '#000000' }}
                                 onClick={handleSem}
@@ -58,56 +60,56 @@ function NotesArea() {
                                 whileTap={{ scale: 1.2, color: '#000000' }}
                                 onClick={handleSem}
                                 transition={{ duration: 0.4 }}
-                                className="sem">
+                                className="sem ">
                                 <button>Sem-II</button>
                             </motion.div>
                             <motion.div
                                 whileTap={{ scale: 1.2, color: '#000000' }}
                                 onClick={handleSem}
                                 transition={{ duration: 0.4 }}
-                                className="sem">
+                                className="sem ">
                                 <button>Sem-III</button>
                             </motion.div>
                             <motion.div
                                 whileTap={{ scale: 1.2, color: '#000000' }}
                                 onClick={handleSem}
                                 transition={{ duration: 0.4 }}
-                                className="sem">
+                                className="sem ">
                                 <button>Sem-IV</button>
                             </motion.div>
                             <motion.div
                                 whileTap={{ scale: 1.2, color: '#000000' }}
                                 onClick={handleSem}
                                 transition={{ duration: 0.4 }}
-                                className="sem">
+                                className="sem ">
                                 <button>Sem-V</button>
                             </motion.div>
                             <motion.div
                                 whileTap={{ scale: 1.2, color: '#000000' }}
                                 onClick={handleSem}
                                 transition={{ duration: 0.4 }}
-                                className="sem">
+                                className="sem ">
                                 <button>Sem-VI</button>
                             </motion.div>
                             <motion.div
                                 whileTap={{ scale: 1.2, color: '#000000' }}
                                 onClick={handleSem}
                                 transition={{ duration: 0.4 }}
-                                className="sem">
+                                className="sem ">
                                 <button>Sem-VII</button>
                             </motion.div>
                             <motion.div
                                 whileTap={{ scale: 1.2, color: '#000000' }}
                                 onClick={handleSem}
                                 transition={{ duration: 0.4 }}
-                                className="sem">
+                                className="sem ">
                                 <button>Sem-VIII</button>
                             </motion.div>
 
 
-                        </div>
+                        {/* </div> */}
                     </div>
-                    <div className="cardArea col-span-3 md:row-span-3 relative bg-slate-200 opacity-85 shadow-inner rounded-lg">
+                    <div className="cardArea col-span-3 md:row-span-3 relative bg-slate-200 opacity-85 shadow-inner sm:rounded-lg">
                         <div className="close absolute top-1/2 left-0 text-white   sm:hidden" onClick={onHideClick}>
                             <FontAwesomeIcon icon={faArrowCircleLeft} className="h-6 w-6" />
                         </div>

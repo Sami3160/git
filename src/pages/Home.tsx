@@ -27,11 +27,11 @@ function Home() {
     const card = useTransform(scrollP2, [0, 1], ["0%", "100%"])
 
 
-    function handleClick() {
-        console.log("Button clicked")
-        // Navigator.navigate('/about');
-        window.location.href = '/nots'
-    }
+    // function handleClick() {
+    //     console.log("Button clicked")
+    //     // Navigator.navigate('/about');
+    //     window.location.href = '/nots'
+    // }
 
     return (
         <div className='w-full '>
