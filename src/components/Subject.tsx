@@ -10,7 +10,8 @@ function Subject({name,totalC, questionC, notesC, onlineRefC}: SubjectProps) :Re
     return (
         <div className="card bg-white p-2 rounded-lg shadow-2xl ">
             <div className="title text-2xl font-bold">{name}</div>
-            <div className="list-none flex flex-col">
+            <div className="h-1 w-full bg-slate-400 "></div>
+            <div className="list-none flex flex-col my-2 p-2 shadow-inner rounded-md bg-slate-200">
                 <div className="text-sm">Total Files: {totalC}</div>
                 <div className="text-sm">Question Sets: {questionC}</div>
                 <div className="text-sm">Notes: {notesC}</div>

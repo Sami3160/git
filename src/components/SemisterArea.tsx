@@ -16,7 +16,7 @@ const Subject = lazy(() => import("./Subject"));
 
 const SemisterArea = () => {
     const [sideBar, setSideBar] = useState(false);
-    const [subjectsArea, setSubjectsArea] = useState<any>([]);
+    const [subjectsArea, setSubjectsArea] = useState<any>();
     const head = useRef<HTMLDivElement | null>(null);
     const contentArea = useRef<HTMLDivElement | null>(null);
     const [sem1, setSem1] = useRecoilState(sem1State);
@@ -57,7 +57,7 @@ const SemisterArea = () => {
     }
     function handleSem(eleContext: any): void {
         let choice: string = eleContext.target.innerText;
-        console.log(choice);
+        // console.log(choice);
         let list = document.querySelector('.data');
         eleContext.target.setAttribute("className", ".active")
         setSubjectsArea(semDatRef[choice]);
@@ -75,100 +75,92 @@ const SemisterArea = () => {
                 <motion.div
                     initial="hidden"
                     transition={{ duration: 1 }}
-                    className="head semList col-span-1 p-3 h-full sm:h-[55em] md:h-fit flex flex-col  space-y-2 justify-between items-center
-                    text-xm md:text-lg text-xs sm:text-sm md:font-extrabold
-                    md:items-end md:flex-row bg-blue-300 sm:rounded-xl md:my-3" ref={head}>
+                    className="head semList  col-span-1 p-3 h-full sm:h-[80vh] md:h-fit flex flex-col  space-y-2 justify-between items-center
+                    md:items-end md:flex-row bg-blue-300  sm:rounded-xl md:my-3 
+                    border-l-8 border-l-blue-400 border-r-8  border-r-slate-400 shadow-inner sm:border-0"  ref={head}>
 
                     <motion.div
                         whileTap={{ scale: 1.2, color: '#000000' }}
                         onClick={handleSem}
                         transition={{ duration: 0.4 }}
-                        className="sem">
-                        <button>Sem-I</button>
+                        className="sem ">
+                        <button className='text-[12px] text-xm md:text-lg text-xs sm:text-sm md:font-extrabold'>Sem-I</button>
                     </motion.div>
                     <motion.div
                         whileTap={{ scale: 1.2, color: '#000000' }}
                         onClick={handleSem}
                         transition={{ duration: 0.4 }}
-                        className="sem " >
-                        <button>Sem-II</button>
+                        className="sem  " >
+                        <button className='text-xm md:text-lg text-xs sm:text-sm md:font-extrabold'>Sem-II</button>
                     </motion.div>
                     <motion.div
                         whileTap={{ scale: 1.2, color: '#000000' }}
                         onClick={handleSem}
                         transition={{ duration: 0.4 }}
-                        className="sem " >
-                        <button>Sem-III</button>
+                        className="sem  " >
+                        <button className='text-xm md:text-lg text-xs sm:text-sm md:font-extrabold'>Sem-III</button>
                     </motion.div>
                     <motion.div
                         whileTap={{ scale: 1.2, color: '#000000' }}
                         onClick={handleSem}
                         transition={{ duration: 0.4 }}
-                        className="sem " >
-                        <button>Sem-IV</button>
+                        className="sem  " >
+                        <button className='text-xm md:text-lg text-xs sm:text-sm md:font-extrabold'>Sem-IV</button>
                     </motion.div>
                     <motion.div
                         whileTap={{ scale: 1.2, color: '#000000' }}
                         onClick={handleSem}
                         transition={{ duration: 0.4 }}
-                        className="sem " >
-                        <button>Sem-V</button>
+                        className="sem  " >
+                        <button className='text-xm md:text-lg text-xs sm:text-sm md:font-extrabold'>Sem-V</button>
                     </motion.div>
                     <motion.div
                         whileTap={{ scale: 1.2, color: '#000000' }}
                         onClick={handleSem}
                         transition={{ duration: 0.4 }}
-                        className="sem " >
-                        <button>Sem-VI</button>
+                        className="sem  " >
+                        <button className='text-xm md:text-lg text-xs sm:text-sm md:font-extrabold'>Sem-VI</button>
                     </motion.div>
                     <motion.div
                         whileTap={{ scale: 1.2, color: '#000000' }}
                         onClick={handleSem}
                         transition={{ duration: 0.4 }}
-                        className="sem " >
-                        <button>Sem-VII</button>
+                        className="sem  " >
+                        <button className='text-xm md:text-lg text-xs sm:text-sm md:font-extrabold'>Sem-VII</button>
                     </motion.div>
                     <motion.div
                         whileTap={{ scale: 1.2, color: '#000000' }}
                         onClick={handleSem}
                         transition={{ duration: 0.4 }}
-                        className="sem " >
-                        <button>Sem-VIII</button>
+                        className="sem  " >
+                        <button className='text-xm md:text-lg text-xs sm:text-sm md:font-extrabold'>Sem-VIII</button>
                     </motion.div>
 
 
                     {/* </div> */}
                 </motion.div>
                 <div className="cardArea col-span-3 md:row-span-3 
-                relative bg-slate-200 opacity-85 h-[60vh] 
+                relative bg-slate-200 opacity-85 h-[80vh] 
                 lg:h-[70vh] md:h-[60vh]  sm:h-[80vh] w-full shadow-inner sm:rounded-lg overflow-scroll" ref={contentArea}>
                     <div className="close absolute top-1/2 left-0 text-white  sm:hidden " onClick={onHideClick}>
                         <FontAwesomeIcon icon={faArrowCircleLeft} className="h-6 w-6" />
                     </div>
-                    <div className="data grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 md:grid-rows-2 gap-4 p-4 overflow-scroll" style={{overflow:'auto'}}>
-                        {/* <div className="card bg-white p-2 rounded-lg shadow-2xl">
-                            <div className="title text-2xl font-bold">Subject Name</div>
-                            <div className="content text-lg">Content</div>
-                        </div>
-                        <div className="card bg-white p-2 rounded-lg shadow-2xl">
-                            <div className="title text-2xl font-bold">Subject Name</div>
-                            <div className="content text-lg">Content</div>
-                        </div>
-                        <div className="card bg-white p-2 rounded-lg shadow-2xl">
-                            <div className="title text-2xl font-bold">Subject Name</div>
-                            <div className="content text-lg">Content</div>
-                        </div> */}
-                        Hello
+                    <div className="data grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 md:grid-rows-2 gap-4 p-4 overflow-scroll " style={{ overflow: 'auto' }}>
 
-                        {subjectsArea && subjectsArea.map((subject: Subject, index: number) => {
-                            if (typeof subject === 'object' && subject !== null) {
-                                return (
-                                    <Suspense key={index} fallback={<CardLoading/>}>
-                                        <Subject {...subject} />
-                                    </Suspense>
-                                )
-                            }
-                        })}
+                        {subjectsArea
+                            ? subjectsArea.length > 0
+                                ? subjectsArea.map((subject: Subject, index: number) => {
+                                    if (typeof subject === 'object' && subject !== null) {
+                                        return (
+                                            <Suspense key={index} fallback={<CardLoading />}>
+                                                <Subject {...subject} />
+                                            </Suspense>
+                                        )
+                                    }
+                                })
+                                : <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2  -translate-y-1/2  text-3xl text-slate-600 w-[100%]'>No subjects</div>
+                            : <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2  -translate-y-1/2 text-3xl  text-slate-600 '>Select something</div>
+                        }
                     </div>
 
                 </div>

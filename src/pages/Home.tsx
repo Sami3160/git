@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar, faBook } from '@fortawesome/free-solid-svg-icons'
-import gharda from '../images/gharda.png'
 import { motion, useScroll, useTransform } from "framer-motion"
 import temp from '../images/temp.png'
+import gharda from '../images/gharda.png'
 import wave1 from "../images/wave1.png"
 import { NavLink } from 'react-router-dom'
 import "./Home.css"
@@ -26,12 +26,6 @@ function Home() {
     const textY = useTransform(scrollYProgress, [0, 1], ["0%", "300%"])
     const card = useTransform(scrollP2, [0, 1], ["0%", "100%"])
 
-
-    // function handleClick() {
-    //     console.log("Button clicked")
-    //     // Navigator.navigate('/about');
-    //     window.location.href = '/nots'
-    // }
 
     return (
         <div className='w-full '>
@@ -134,7 +128,7 @@ function Home() {
             </div>
 
 
-            <div className="curves layer1  relative flex flex-col justify-end" >
+            <div className="curves layer1  relative -z-20  flex flex-col justify-end" >
                 <motion.div
                     transition={{ type: 'spring', stiffness: 100, damping: 20 }}
                     className="features grid sm:grid-cols-3 px-2 sm:px-6 md:16 lg:px-32  pt-10 w-full">

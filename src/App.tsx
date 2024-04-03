@@ -8,6 +8,7 @@ const Navbar = lazy(() => import('./components/Navbar'))
 const Home = lazy(() => import('./pages/Home'))
 const Footer = lazy(() => import('./components/Footer'))
 const NotesArea = lazy(() => import('./pages/NotesArea'))
+const NavbarWithSteroids = lazy(() => import('./components/BottomNavbar'))
 function App() {
 
   const routes: RouteObject[] = [
@@ -25,19 +26,15 @@ function App() {
   const router = createBrowserRouter(routes)
   return (
 
-    <Suspense fallback={<Loading/>}>
-      {/* <RouterProvider router={router} >
-        <Navbar />
-        <Footer />
-      </RouterProvider> */}
+    <Suspense fallback={<Loading />}>
       <BrowserRouter>
         <RecoilRoot>
 
           <Navbar />
-          <Routes>
+          <NavbarWithSteroids />
+          <Routes >
             <Route path="/" element={<Home />} errorElement={<div>Not Found..huihiuii</div>} />
             <Route path="/notes" element={<NotesArea />} />
-            {/* <Route  path="/" element={<Home/>} errorElement={<div>Not Found..huihiuii</div>} /> */}
           </Routes>
           <Footer />
         </RecoilRoot>
