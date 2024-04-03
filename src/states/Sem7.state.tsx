@@ -1,7 +1,7 @@
 import { atom, selector } from "recoil";
 
-export const sem3State = atom({
-    key: "sem3State",
+export const sem7State = atom({
+    key: "sem7State",
     default: [
         { name: "Applied Mathematics 3", totalC:12, questionC: 11, notesC: 6, onlineRefC: 0 },
         { name: "Discrete structure and graph theory", totalC: 21, questionC: 11, notesC: 6, onlineRefC: 0 },

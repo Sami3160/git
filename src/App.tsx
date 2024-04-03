@@ -3,6 +3,7 @@ import { BrowserRouter, Route, RouteObject, RouterProvider, Routes, createBrowse
 import './App.css'; // Import your existing styles
 import { Suspense, lazy } from 'react';
 import { RecoilRoot } from 'recoil';
+import Loading from './components/Loading';
 const Navbar = lazy(() => import('./components/Navbar'))
 const Home = lazy(() => import('./pages/Home'))
 const Footer = lazy(() => import('./components/Footer'))
@@ -24,7 +25,7 @@ function App() {
   const router = createBrowserRouter(routes)
   return (
 
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Loading/>}>
       {/* <RouterProvider router={router} >
         <Navbar />
         <Footer />
