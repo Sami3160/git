@@ -9,6 +9,7 @@ const Home = lazy(() => import('./pages/Home'))
 const Footer = lazy(() => import('./components/Footer'))
 const NotesArea = lazy(() => import('./pages/NotesArea'))
 const NavbarWithSteroids = lazy(() => import('./components/BottomNavbar'))
+const UploadNotes = lazy(() => import('./pages/UploadNotes'));
 function App() {
 
   const routes: RouteObject[] = [
@@ -35,6 +36,8 @@ function App() {
           <Routes >
             <Route path="/" element={<Home />} errorElement={<div>Not Found..huihiuii</div>} />
             <Route path="/notes" element={<NotesArea />} />
+            <Route path="*" element={<div>Not Found..huihiuii</div>} />
+            <Route path="/upload" element={<UploadNotes/>} />
           </Routes>
           <Footer />
         </RecoilRoot>
