@@ -33,12 +33,14 @@ function App() {
 
           <Navbar />
           <NavbarWithSteroids />
-          <Routes >
-            <Route path="/" element={<Home />} errorElement={<div>Not Found..huihiuii</div>} />
-            <Route path="/notes" element={<NotesArea />} />
-            <Route path="*" element={<div>Not Found..huihiuii</div>} />
-            <Route path="/upload" element={<UploadNotes/>} />
-          </Routes>
+
+            <Routes >
+              <Route path="/" element={<Home />} errorElement={<div>Not Found..huihiuii</div>} />
+              <Route path="/notes" element={<NotesArea />} />
+              <Route path="/upload" element={<UploadNotes />} />
+              {/* <Route path="*" element={<div>Not Found..huihiuii</div>} /> */}
+            </Routes>
+
           <Footer />
         </RecoilRoot>
 

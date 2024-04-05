@@ -12,5 +12,14 @@ export const sem1State = atom({
     ],
 });
 
+export const semCount= atom({
+    key:'countForSem',
+    default:0
+})
 
-
+export const semister1Selector=selector({
+    key:"getSubject",
+    get(opts) {
+        
+    },
+})

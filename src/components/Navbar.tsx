@@ -21,13 +21,13 @@ function Navbar() {
                             </NavLink>
                         </li>
                         <li className="link cursor-pointer">
-                            <NavLink to={''}>
+                            <NavLink to={'/upload'}>
 
                                 Upload Notes
                             </NavLink>
                         </li>
                         <li className="adm text-white bg-black cursor-pointer">
-                            <NavLink to={''}>
+                            <NavLink to={'/admin'}>
 
                                 Admin Login
                             </NavLink>
