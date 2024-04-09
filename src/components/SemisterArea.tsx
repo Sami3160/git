@@ -79,7 +79,7 @@ const SemisterArea = () => {
                     md:items-end md:flex-row bg-blue-300  sm:rounded-xl md:my-3 
                     border-l-8 border-l-blue-400 border-r-8  border-r-slate-400 shadow-inner sm:border-0"  ref={head}>
 
-                    <motion.div
+                    {/* <motion.div
                         whileTap={{ scale: 1.2, color: '#000000' }}
                         onClick={handleSem}
                         transition={{ duration: 0.4 }}
@@ -92,7 +92,7 @@ const SemisterArea = () => {
                         transition={{ duration: 0.4 }}
                         className="sem  " >
                         <button className='text-xm md:text-lg text-xs sm:text-sm md:font-extrabold'>Sem-II</button>
-                    </motion.div>
+                    </motion.div> */}
                     <motion.div
                         whileTap={{ scale: 1.2, color: '#000000' }}
                         onClick={handleSem}

@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import { db, app } from '../config/firebase.config';
 import { onSnapshot, getDocs } from 'firebase/firestore';
+import { useRecoilValue } from 'recoil';
+import { getSubjectSem1 } from '../states/Sem1.state';
 import { useState } from 'react';
 import { collection } from 'firebase/firestore';
 
@@ -10,6 +12,7 @@ interface Department {
 export default function UploadNotes() {
   const [notes, setNotes] = useState<{ id: string }[]>([]);
   const [departmentNames, setDepartmentNames] = useState<Department[]>([]);
+  const subject = useRecoilValue(getSubjectSem1);
 
   useEffect(() => {
     const fetchDepartments = async () => {
@@ -29,8 +32,10 @@ export default function UploadNotes() {
         console.error('Error fetching department names: ', error);
       }
     };
-
+    console.log('Subject: ', subject(2));
+    
     fetchDepartments();
+
   }, []);
 
 

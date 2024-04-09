@@ -1,5 +1,5 @@
 // App.js
-import { BrowserRouter, Route, RouteObject, RouterProvider, Routes, createBrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, RouteObject, Routes } from 'react-router-dom';
 import './App.css'; // Import your existing styles
 import { Suspense, lazy } from 'react';
 import { RecoilRoot } from 'recoil';
@@ -10,6 +10,7 @@ const Footer = lazy(() => import('./components/Footer'))
 const NotesArea = lazy(() => import('./pages/NotesArea'))
 const NavbarWithSteroids = lazy(() => import('./components/BottomNavbar'))
 const UploadNotes = lazy(() => import('./pages/UploadNotes'));
+const UploadFile = lazy(() => import('./pages/UploadFile'));
 function App() {
 
   const routes: RouteObject[] = [
@@ -24,7 +25,6 @@ function App() {
     }
   ]
 
-  const router = createBrowserRouter(routes)
   return (
 
     <Suspense fallback={<Loading />}>
@@ -34,12 +34,12 @@ function App() {
           <Navbar />
           <NavbarWithSteroids />
 
-            <Routes >
-              <Route path="/" element={<Home />} errorElement={<div>Not Found..huihiuii</div>} />
-              <Route path="/notes" element={<NotesArea />} />
-              <Route path="/upload" element={<UploadNotes />} />
-              {/* <Route path="*" element={<div>Not Found..huihiuii</div>} /> */}
-            </Routes>
+          <Routes >
+            <Route path="/" element={<Home />} errorElement={<div>Not Found..huihiuii</div>} />
+            <Route path="/notes" element={<NotesArea />} />
+            <Route path="/upload" element={<UploadFile />} />
+            {/* <Route path="*" element={<div>Not Found..huihiuii</div>} /> */}
+          </Routes>
 
           <Footer />
         </RecoilRoot>

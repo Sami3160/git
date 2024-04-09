@@ -3,7 +3,6 @@ import { faStar, faBook } from '@fortawesome/free-solid-svg-icons'
 import { motion, useScroll, useTransform } from "framer-motion"
 import temp from '../images/temp.png'
 import gharda from '../images/gharda.png'
-import wave1 from "../images/wave1.png"
 import { NavLink } from 'react-router-dom'
 import "./Home.css"
 
@@ -58,7 +57,7 @@ function Home() {
                         initial={{ y: -100 }}
                         animate={{ y: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="decription font-mono drop-shadow-xl top-0 invisible md:visible mx-16 text-sm md:text-md flex text-center z-10 text-[#387ADF]"
+                        className="decription relative font-mono drop-shadow-xl top-0 invisible md:visible mx-16 text-sm md:text-md flex text-center z-10 text-[#387ADF]"
 
 
                         style={{ border: "2px solid #387ADF", borderRadius: "10px", padding: "10px", y: bgY, backgroundColor: "white" }}
@@ -101,18 +100,19 @@ function Home() {
                 <NavLink to={"/notes"}>
 
                     <div className="button mx-auto">
-                        <motion.a
+                        <motion.div
                             initial={{ x: -200, scale: 0.5 }}
                             whileHover={{ scale: 1.3, boxShadow: "0px 0px 10px 0px #387ADF" }}
                             whileInView={{ x: 0, scale: 1 }}
                             transition={{ duration: 0.5, type: 'spring', stiffness: 100, damping: 10 }}
-                            href="#_" className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
+                            // href="#_" 
+                            className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
                             <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <FontAwesomeIcon icon={faBook} />  </svg>
                             </span>
                             <span className="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease" > Visit Notes</span>
                             <span className="relative invisible">Visit Notes</span>
-                        </motion.a>
+                        </motion.div>
 
                     </div>
                 </NavLink>
@@ -131,14 +131,14 @@ function Home() {
             <div className="curves layer1  relative -z-20  flex flex-col justify-end" >
                 <motion.div
                     transition={{ type: 'spring', stiffness: 100, damping: 20 }}
-                    className="features grid sm:grid-cols-3 px-2 sm:px-6 md:16 lg:px-32  pt-10 w-full">
+                    className="features relative grid sm:grid-cols-3 px-2 sm:px-6 md:16 lg:px-32  pt-10 w-full">
                     <motion.div
 
                         initial={{ x: -100, opacity: 0, filter: 'blur(10px)' }}
-                        whileInView={{ x: 0, opacity: 1, filter: 'blur(0px' }}
+                        whileInView={{ x: 0, opacity: 1, filter: 'blur(0px)' }}
                         transition={{ duration: 0.5, type: 'spring', stiffness: 100, damping: 10 }}
                         // style={{ y: card }}
-                        className="card col-span-1 w-full h-56  p-2 z-10">
+                        className="card relative col-span-1 w-full h-56  p-2 z-10">
                         <div className="cardContent p-2 shadow-xl mx-auto sm:mx-0 md:mx-auto rounded-lg w-[50%] sm:w-full md:w-[70%] h-full bg-[#50C4ED] border-[8px] opacity-[0.7] border-[#387ADF]">
                             <div className="title text-2xl  text-center">Total Semesters</div>
                             <div className="title text-6xl flex text-center h-[70%] justify-center items-center font-extrabold">
@@ -150,9 +150,9 @@ function Home() {
                     </motion.div>
                     <motion.div
                         initial={{ x: -100, opacity: 0, filter: 'blur(10px)' }}
-                        whileInView={{ x: 0, opacity: 1, filter: 'blur(0px' }}
-                        transition={{ duration: 0.5, type: 'spring', stiffness: 100, damping: 10, delay: 0.2 }}
-                        className="card col-span-1 w-full h-56 p-2 z-10">
+                        whileInView={{ x: 0, opacity: 1, filter: 'blur(0px)' }}
+                       transition={{ duration: 0.5, type: 'spring', stiffness: 100, damping: 10, delay: 0.2 }}
+                        className="card relative col-span-1 w-full h-56 p-2 z-10">
                         <div className="cardContent p-2 shadow-xl mx-auto sm:mx-0 md:mx-auto rounded-lg w-[50%] sm:w-full md:w-[70%] h-full bg-[#50C4ED] border-[8px] opacity-[0.7] border-[#387ADF]">
                             <div className="title text-2xl  text-center">Total Question</div>
                             <div className="title text-6xl flex text-center h-[70%] justify-center items-center font-extrabold">
@@ -164,9 +164,9 @@ function Home() {
                     </motion.div>
                     <motion.div
                         initial={{ x: -100, opacity: 0, filter: 'blur(10px)' }}
-                        whileInView={{ x: 0, opacity: 1, filter: 'blur(0px' }}
-                        transition={{ duration: 0.5, type: 'spring', stiffness: 100, damping: 10, delay: 0.6 }}
-                        className="card col-span-1 w-full h-56  p-2 z-10">
+                        whileInView={{ x: 0, opacity: 1, filter: 'blur(0px)' }}
+                       transition={{ duration: 0.5, type: 'spring', stiffness: 100, damping: 10, delay: 0.6 }}
+                        className="card relative col-span-1 w-full h-56  p-2 z-10">
                         <div className="cardContent p-2 shadow-xl mx-auto  sm:mx-0 md:mx-auto rounded-lg w-[50%] sm:w-full md:w-[70%] h-full bg-[#50C4ED] border-[8px] opacity-[0.7] border-[#387ADF]">
                             <div className="title text-2xl  text-center">Total Notes</div>
                             <div className="title text-6xl flex text-center h-[70%] justify-center items-center font-extrabold">
