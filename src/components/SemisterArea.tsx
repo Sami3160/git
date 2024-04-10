@@ -2,48 +2,20 @@ import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from 'framer-motion';
 import { lazy, useRef, useState, Suspense } from 'react';
-import { RecoilState, useRecoilState } from 'recoil';
-import { sem1State } from '../states/Sem1.state';
-import { sem2State } from '../states/Sem2.state';
-import { sem3State } from '../states/Sem3.state';
-import { sem4State } from '../states/Sem4.state';
-import { sem5State } from '../states/Sem5.state';
-import { sem6State } from '../states/Sem6.state';
-import { sem7State } from '../states/Sem7.state';
-import { sem8State } from '../states/Sem8.state';
+
 import CardLoading from './CardLoading';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
 const Subject = lazy(() => import("./Subject"));
 
 const SemisterArea = () => {
+    const param = useParams()
+
+    const navigate = useNavigate();
     const [sideBar, setSideBar] = useState(false);
     const [subjectsArea, setSubjectsArea] = useState<any>();
     const head = useRef<HTMLDivElement | null>(null);
     const contentArea = useRef<HTMLDivElement | null>(null);
-    const [sem1, setSem1] = useRecoilState(sem1State);
-    const [sem2, setSem2] = useRecoilState(sem2State);
-    const [sem3, setSem3] = useRecoilState(sem3State);
-    const [sem4, setSem4] = useRecoilState(sem4State);
-    const [sem5, setSem5] = useRecoilState(sem5State);
-    const [sem6, setSem6] = useRecoilState(sem6State);
-    const [sem7, setSem7] = useRecoilState(sem7State);
-    const [sem8, setSem8] = useRecoilState(sem8State);
-    interface Subject {
-        name: string;
-        totalC: number;
-        questionC: number;
-        notesC: number;
-        onlineRefC: number;
-    }
-    const semDatRef: Record<string, typeof sem1> = {
-        "Sem-I": sem1,
-        "Sem-II": sem2,
-        "Sem-III": sem3,
-        "Sem-IV": sem4,
-        "Sem-V": sem5,
-        "Sem-VI": sem6,
-        "Sem-VII": sem7,
-        "Sem-VIII": sem8
-    }
+
 
     function onHideClick() {
         if (sideBar && head.current) {
@@ -57,16 +29,7 @@ const SemisterArea = () => {
     }
     function handleSem(eleContext: any): void {
         let choice: string = eleContext.target.innerText;
-        // console.log(choice);
-        let list = document.querySelector('.data');
-        eleContext.target.setAttribute("className", ".active")
-        setSubjectsArea(semDatRef[choice]);
-
-        if (list) {
-            for (let ele of list.children as any) {
-                ele.removeAttribute(".active");
-            }
-        }
+        navigate('/notes/' + choice);
 
     }
     return (
@@ -79,57 +42,43 @@ const SemisterArea = () => {
                     md:items-end md:flex-row bg-blue-300  sm:rounded-xl md:my-3 
                     border-l-8 border-l-blue-400 border-r-8  border-r-slate-400 shadow-inner sm:border-0"  ref={head}>
 
-                    {/* <motion.div
-                        whileTap={{ scale: 1.2, color: '#000000' }}
-                        onClick={handleSem}
-                        transition={{ duration: 0.4 }}
-                        className="sem ">
-                        <button className='text-[12px] text-xm md:text-lg text-xs sm:text-sm md:font-extrabold'>Sem-I</button>
-                    </motion.div>
                     <motion.div
-                        whileTap={{ scale: 1.2, color: '#000000' }}
-                        onClick={handleSem}
-                        transition={{ duration: 0.4 }}
-                        className="sem  " >
-                        <button className='text-xm md:text-lg text-xs sm:text-sm md:font-extrabold'>Sem-II</button>
-                    </motion.div> */}
-                    <motion.div
-                        whileTap={{ scale: 1.2, color: '#000000' }}
+                        whileTap={{ scale: 1.1, color: '#000000' }}
                         onClick={handleSem}
                         transition={{ duration: 0.4 }}
                         className="sem  " >
                         <button className='text-xm md:text-lg text-xs sm:text-sm md:font-extrabold'>Sem-III</button>
                     </motion.div>
                     <motion.div
-                        whileTap={{ scale: 1.2, color: '#000000' }}
+                        whileTap={{ scale: 1.1, color: '#000000' }}
                         onClick={handleSem}
                         transition={{ duration: 0.4 }}
                         className="sem  " >
                         <button className='text-xm md:text-lg text-xs sm:text-sm md:font-extrabold'>Sem-IV</button>
                     </motion.div>
                     <motion.div
-                        whileTap={{ scale: 1.2, color: '#000000' }}
+                        whileTap={{ scale: 1.1, color: '#000000' }}
                         onClick={handleSem}
                         transition={{ duration: 0.4 }}
                         className="sem  " >
                         <button className='text-xm md:text-lg text-xs sm:text-sm md:font-extrabold'>Sem-V</button>
                     </motion.div>
                     <motion.div
-                        whileTap={{ scale: 1.2, color: '#000000' }}
+                        whileTap={{ scale: 1.1, color: '#000000' }}
                         onClick={handleSem}
                         transition={{ duration: 0.4 }}
                         className="sem  " >
                         <button className='text-xm md:text-lg text-xs sm:text-sm md:font-extrabold'>Sem-VI</button>
                     </motion.div>
                     <motion.div
-                        whileTap={{ scale: 1.2, color: '#000000' }}
+                        whileTap={{ scale: 1.1, color: '#000000' }}
                         onClick={handleSem}
                         transition={{ duration: 0.4 }}
                         className="sem  " >
                         <button className='text-xm md:text-lg text-xs sm:text-sm md:font-extrabold'>Sem-VII</button>
                     </motion.div>
                     <motion.div
-                        whileTap={{ scale: 1.2, color: '#000000' }}
+                        whileTap={{ scale: 1.1, color: '#000000' }}
                         onClick={handleSem}
                         transition={{ duration: 0.4 }}
                         className="sem  " >
@@ -145,22 +94,24 @@ const SemisterArea = () => {
                     <div className="close absolute top-1/2 left-0 text-white  sm:hidden " onClick={onHideClick}>
                         <FontAwesomeIcon icon={faArrowCircleLeft} className="h-6 w-6" />
                     </div>
-                    <div className="data grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 md:grid-rows-2 gap-4 p-4 overflow-scroll " style={{ overflow: 'auto' }}>
+                    <div className="data p-4 ">
 
-                        {subjectsArea
-                            ? subjectsArea.length > 0
-                                ? subjectsArea.map((subject: Subject, index: number) => {
-                                    if (typeof subject === 'object' && subject !== null) {
-                                        return (
-                                            <Suspense key={index} fallback={<CardLoading />}>
-                                                <Subject {...subject} />
-                                            </Suspense>
-                                        )
-                                    }
-                                })
-                                : <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2  -translate-y-1/2  text-3xl text-slate-600 w-[100%]'>No subjects</div>
-                            : <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2  -translate-y-1/2 text-3xl  text-slate-600 '>Select something</div>
-                        }
+                        {/* {subjectsArea
+                                ? subjectsArea.length > 0
+                                    ? subjectsArea.map((subject: Subject, index: number) => {
+                                        if (typeof subject === 'object' && subject !== null) {
+                                            return (
+                                                <Suspense key={index} fallback={<CardLoading />}>
+                                                    <Subject {...subject} />
+                                                </Suspense>
+                                            )
+                                        }
+                                    })
+                                    : <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2  -translate-y-1/2  text-3xl text-slate-600 w-[100%]'>No subjects</div>
+                                : <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2  -translate-y-1/2 text-3xl  text-slate-600 '>Select something</div>
+                            } */}
+                        {!param.semId && <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2  -translate-y-1/2 text-3xl  text-slate-600 '>Select something</div>}
+                        <Outlet/>
                     </div>
 
                 </div>

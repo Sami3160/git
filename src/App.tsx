@@ -11,6 +11,7 @@ const NotesArea = lazy(() => import('./pages/NotesArea'))
 const NavbarWithSteroids = lazy(() => import('./components/BottomNavbar'))
 const UploadNotes = lazy(() => import('./pages/UploadNotes'));
 const UploadFile = lazy(() => import('./pages/UploadFile'));
+const SubSemisterArea = lazy(() => import('./components/SubSemisterArea'));
 function App() {
 
   const routes: RouteObject[] = [
@@ -36,7 +37,11 @@ function App() {
 
           <Routes >
             <Route path="/" element={<Home />} errorElement={<div>Not Found..huihiuii</div>} />
-            <Route path="/notes" element={<NotesArea />} />
+            <Route path="/notes" element={<NotesArea />} errorElement={<div>Not Found..huihiuii</div>}>
+              <Route path=":semId"  element={<SubSemisterArea />} >
+                <Route path=":subject" element={<SubSemisterArea />} />
+              </Route>
+            </Route>
             <Route path="/upload" element={<UploadFile />} />
             {/* <Route path="*" element={<div>Not Found..huihiuii</div>} /> */}
           </Routes>

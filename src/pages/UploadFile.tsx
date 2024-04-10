@@ -1,4 +1,4 @@
-import React, { FormEvent, MouseEventHandler, useRef, useState } from 'react';
+import React, { FormEvent, MouseEventHandler, useEffect, useRef, useState } from 'react';
 import { sem3State } from '../states/Sem3.state';
 import { sem4State } from '../states/Sem4.state';
 import { sem5State } from '../states/Sem5.state';
@@ -8,13 +8,38 @@ import { sem8State } from '../states/Sem8.state';
 import { storage } from '../config/firebase.config';
 import { getStorage, ref, uploadBytes } from 'firebase/storage';
 import { useRecoilState } from 'recoil';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { useJwt } from 'react-jwt';
+interface Subject {
+    name: string;
+    totalC: number;
+    questionC: number;
+    notesC: number;
+    onlineRefC: number;
+}
 function UploadFile() {
+    const btn=useRef<HTMLButtonElement>(null);
+    const navigate=useNavigate();
+    const {decodedToken ,isExpired}=useJwt(localStorage.getItem('user')||'');
+    useEffect(()=>{
+        // if(isExpired){
+        //     // Navigate('/login');
+        //     navigate('/login')
+        // }
+
+        const res=localStorage.getItem('user');
+
+        document.title = "Upload Notes"
+        
+    },[])
+
     const [file, setFile] = useState<File | null>();
-    const [subjects, setSubjects] = useState<typeof sem3 | Object[] |null>([{name:"No Semester Selected"}]);
+    const [subjects, setSubjects] = useState<object[]| typeof sem3>([{ name: "No Semester Selected" }]);
     const [invalid, setInvalid] = useState<boolean>(false);
     const sem = useRef<HTMLSelectElement>(null);
     const dept = useRef<HTMLSelectElement>(null);
     const type = useRef<HTMLSelectElement>(null);
+    const subname =useRef<HTMLSelectElement>(null);
 
     const sem3 = useRecoilState(sem3State);
     const sem4 = useRecoilState(sem4State);
@@ -29,9 +54,14 @@ function UploadFile() {
     };
 
     const handleUpload = () => {
+        btn.current?.setAttribute('disabled','true');
+        btn.current?.classList.add('bg-gray-200');
+        btn.current?.classList.add('cursor-not-allowed');
+
         const semName = sem.current?.value
         const deptName = dept.current?.value
         const typeName = type.current?.value
+        const subName=subname.current?.value;
         if (semName === "default" || deptName === "default" || typeName === "default") {
             setTimeout(() => {
                 setInvalid(false);
@@ -40,9 +70,18 @@ function UploadFile() {
             return;
         }
         if (file) {
-            const storageRef = ref(storage, `Department Notes/${deptName}/${semName}/${typeName}/` + file.name);
+            const storageRef = ref(storage, `Department Notes/${deptName}/${semName}/${subName}/${typeName}/` + file.name);
             uploadBytes(storageRef, file).then(() => {
-                console.log('File uploaded successfully');
+                console.log('File uploaded successfully',file.name);
+                btn.current?.classList.remove('bg-gray-200');
+                btn.current?.classList.remove('cursor-not-allowed');
+                btn.current?.removeAttribute('disabled');
+
+            }).catch((err) => {
+                console.log(err);
+                btn.current?.classList.remove('bg-gray-200');
+                btn.current?.classList.remove('cursor-not-allowed');
+                btn.current?.removeAttribute('disabled');
             });
         }
     }
@@ -55,7 +94,7 @@ function UploadFile() {
             </div>
             <div className="main m-14 mt-16 bg-blue-50">
                 {invalid ? <p className='text-red-500 p-2'>Please select department, semester and category correctly.</p> : null}
-                <div className="opt grid grid-cols-3 p-2 space-x-2 space-y-2 items-end">
+                <div className="opt grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 p-2 space-x-2 space-y-10 sm:space-y-2 items-end">
 
                     <div className="dept col-span-1  bg-blue-100 h-fit " >
                         <select name="department" id="" className='bg-blue-100 p-4 cursor-pointer w-full' ref={dept}>
@@ -66,28 +105,31 @@ function UploadFile() {
                         </select>
                     </div>
 
-                    <div className="semester col-span-1  bg-blue-100" >
+                    <div className="semester col-span-1  bg-blue-100 " >
 
                         <select name="semester" id="" className='bg-blue-100 p-4 cursor-pointer w-full' ref={sem}
-                         onChange={(e:any)=>{
+                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
 
-                            
-                            if (e.target?.value === "Semester 3") {
-                                setSubjects(sem3);
-                            } else if (e.target?.value === "Semester 4") {
-                                setSubjects(sem4);
-                            } else if (e.target?.value === "Semester 5") {
-                                setSubjects(sem5);
-                            } else if (e.target?.value === "Semester 6") {
-                                setSubjects(sem6);
-                            } else if (e.target?.value === "Semester 7") {
-                                setSubjects(sem7);
-                            } else if (e.target?.value === "Semester 8") {
-                                setSubjects(sem8);
-                            } else {
-                                setSubjects([{ name: "No Semester Selected" }]);
-                            }
-                        }}
+                                // console.log(subjects);
+                                if (e.target?.value === "Default") {
+                                    setSubjects([{ name: "No Semester Selected" }]);
+                                }
+                                if (e.target?.value === "Semester 3") {
+                                    setSubjects(sem3[0]);
+                                } else if (e.target?.value === "Semester 4") {
+                                    setSubjects(sem4[0]);
+                                } else if (e.target?.value === "Semester 5") {
+                                    setSubjects(sem5[0]);
+                                } else if (e.target?.value === "Semester 6") {
+                                    setSubjects(sem6[0]);
+                                } else if (e.target?.value === "Semester 7") {
+                                    setSubjects(sem7[0]);
+                                } else if (e.target?.value === "Semester 8") {
+                                    setSubjects(sem8[0]);
+                                } else {
+                                    setSubjects([{ name: "No Semester Selected" }]);
+                                }
+                            }}
                         >
                             <option value="default">Select Semester</option>
                             <option value="Semester 3">Semester 3</option>
@@ -99,10 +141,13 @@ function UploadFile() {
                         </select>
                     </div>
                     <div className="Subject col-span-1  bg-blue-100" >
-                        <select name="type" id="" className='bg-blue-100 p-4 cursor-pointer w-full' ref={type}>
+                        <select name="type" id="" className='bg-blue-100 p-4 cursor-pointer w-full' ref={subname}>
                             {
-                                subjects?.map((ele:any,index:number)=>{
-                                    return <option key={index} value={ele.name}>{ele.name}</option>
+                                subjects.map((subject: any, index: number) => {
+                                    // console.log(subject);
+                                    if (typeof subject === 'object' && subject !== null) {
+                                        return <option key={index} value={subject.name}>{subject.name}</option>
+                                    }
                                 })
                             }
                         </select>
@@ -119,16 +164,16 @@ function UploadFile() {
                             <option value="Syllabus">Syllabus</option>
                         </select>
                     </div>
-                    
+
                 </div>
 
-                <div className="controls m-2 flex items-end space-x-2">
+                <div className="controls m-2 flex flex-col sm:flex-row items-start sm:items-end space-y-4 sm:space-x-8 pb-8">
                     <div className="grid w-full max-w-xs items-center gap-1.5 shadow-lg">
                         <label className="text-sm text-gray-400 font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">File</label>
                         <input type="file" onChange={handleFileChange} className="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-gray-400 file:border-0 file:bg-transparent file:text-gray-600 file:text-sm file:font-medium" />
                     </div>
 
-                    <button onClick={handleUpload} className='bg-green-100 p-2 rounded-md px-5 h-fit shadow-lg'>Upload</button>
+                    <button onClick={handleUpload} ref={btn} className='bg-green-100 p-2 rounded-md px-5 h-fit shadow-lg'>Upload</button>
                 </div>
             </div>
         </div>

@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 const NavbarWithSteroids = () => {
     return (
-        <div className="fixed bottom-0 z-50 bg-slate-50 flex flex-col sm:hidden w-full">
+        <div className="fixed bottom-0 z-50 bg-slate-50 flex flex-col md:hidden w-full">
 
             <div className="border border-gray-300 py-3 flex gap-1 shadow-xl rounded-md justify-evenly">
                 <div className="group relative px-4 cursor-pointer">
