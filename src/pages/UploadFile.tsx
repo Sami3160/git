@@ -8,8 +8,7 @@ import { sem8State } from '../states/Sem8.state';
 import { storage } from '../config/firebase.config';
 import { getStorage, ref, uploadBytes } from 'firebase/storage';
 import { useRecoilState } from 'recoil';
-import { Navigate, useNavigate } from 'react-router-dom';
-import { useJwt } from 'react-jwt';
+import {  useNavigate } from 'react-router-dom';
 interface Subject {
     name: string;
     totalC: number;
@@ -18,28 +17,35 @@ interface Subject {
     onlineRefC: number;
 }
 function UploadFile() {
-    const btn=useRef<HTMLButtonElement>(null);
-    const navigate=useNavigate();
-    const {decodedToken ,isExpired}=useJwt(localStorage.getItem('user')||'');
-    useEffect(()=>{
-        // if(isExpired){
-        //     // Navigate('/login');
-        //     navigate('/login')
-        // }
+    const btn = useRef<HTMLButtonElement>(null);
+    const navigate = useNavigate();
+    const token: any = localStorage.getItem("user")
+    useEffect(() => {
+        document.title = "Admin Dashboard"
 
-        const res=localStorage.getItem('user');
+        if (token) {
 
-        document.title = "Upload Notes"
-        
-    },[])
+            const [email, expiryDateString] = token.split('_');
+            const expiryDate = new Date(Number(expiryDateString));
+            const expectedEmail = localStorage.getItem('email');
+
+            if (email !== expectedEmail || expiryDate < new Date()) {
+                // The token is invalid or expired
+                navigate("/login")
+            }
+        } else {
+            navigate("/login")
+        }
+
+    }, [])
 
     const [file, setFile] = useState<File | null>();
-    const [subjects, setSubjects] = useState<object[]| typeof sem3>([{ name: "No Semester Selected" }]);
+    const [subjects, setSubjects] = useState<object[] | typeof sem3>([{ name: "No Semester Selected" }]);
     const [invalid, setInvalid] = useState<boolean>(false);
     const sem = useRef<HTMLSelectElement>(null);
     const dept = useRef<HTMLSelectElement>(null);
     const type = useRef<HTMLSelectElement>(null);
-    const subname =useRef<HTMLSelectElement>(null);
+    const subname = useRef<HTMLSelectElement>(null);
 
     const sem3 = useRecoilState(sem3State);
     const sem4 = useRecoilState(sem4State);
@@ -54,14 +60,14 @@ function UploadFile() {
     };
 
     const handleUpload = () => {
-        btn.current?.setAttribute('disabled','true');
+        btn.current?.setAttribute('disabled', 'true');
         btn.current?.classList.add('bg-gray-200');
         btn.current?.classList.add('cursor-not-allowed');
 
         const semName = sem.current?.value
         const deptName = dept.current?.value
         const typeName = type.current?.value
-        const subName=subname.current?.value;
+        const subName = subname.current?.value;
         if (semName === "default" || deptName === "default" || typeName === "default") {
             setTimeout(() => {
                 setInvalid(false);
@@ -72,7 +78,7 @@ function UploadFile() {
         if (file) {
             const storageRef = ref(storage, `Department Notes/${deptName}/${semName}/${subName}/${typeName}/` + file.name);
             uploadBytes(storageRef, file).then(() => {
-                console.log('File uploaded successfully',file.name);
+                console.log('File uploaded successfully', file.name);
                 btn.current?.classList.remove('bg-gray-200');
                 btn.current?.classList.remove('cursor-not-allowed');
                 btn.current?.removeAttribute('disabled');
