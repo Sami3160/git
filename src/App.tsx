@@ -47,7 +47,7 @@ function App() {
             </Route>
             <Route path="/upload" element={<UploadFile />} />
             <Route path="/login" element={<LoginForm />} />
-            <Route path="/signup" element={<SignupForm />} />
+            {/* <Route path="/signup" element={<SignupForm />} /> */}
             <Route path="/admin" element={<AdminDashboard />} />
             {/* <Route path="*" element={<div>Not Found..huihiuii</div>} /> */}
           </Routes>
