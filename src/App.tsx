@@ -4,6 +4,8 @@ import './App.css'; // Import your existing styles
 import { Suspense, lazy } from 'react';
 import { RecoilRoot } from 'recoil';
 import Loading from './components/Loading';
+import AboutUs from './components/About';
+import ErrorPage from './components/ErrorPage';
 const Navbar = lazy(() => import('./components/Navbar'))
 const Home = lazy(() => import('./pages/Home'))
 const Footer = lazy(() => import('./components/Footer'))
@@ -49,7 +51,8 @@ function App() {
             <Route path="/login" element={<LoginForm />} />
             {/* <Route path="/signup" element={<SignupForm />} /> */}
             <Route path="/admin" element={<AdminDashboard />} />
-            {/* <Route path="*" element={<div>Not Found..huihiuii</div>} /> */}
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="*" element={<ErrorPage/>} />
           </Routes>
 
           <Footer />
