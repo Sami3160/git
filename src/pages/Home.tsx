@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar, faBook } from '@fortawesome/free-solid-svg-icons'
 import { motion, useScroll, useTransform } from "framer-motion"
-import temp from '../images/temp.png'
 import gharda from '../images/gharda.png'
 import { NavLink } from 'react-router-dom'
 import "./Home.css"
@@ -17,16 +16,16 @@ function Home() {
     })
 
     const ref2 = useRef(null)
-    const { scrollYProgress: scrollP2 } = useScroll({
-        target: ref2,
-        offset: ["start start", "end start"]
-    })
+    // const { scrollYProgress: scrollP2 } = useScroll({
+    //     target: ref2,
+    //     offset: ["start start", "end start"]
+    // })
     useEffect(() => {
         document.title = "Welcome to GIT Knowledge Hub"
     }, [])
     const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "200%"])
     const textY = useTransform(scrollYProgress, [0, 1], ["0%", "300%"])
-    const card = useTransform(scrollP2, [0, 1], ["0%", "100%"])
+    // const card = useTransform(scrollP2, [0, 1], ["0%", "100%"])
 
 
     return (

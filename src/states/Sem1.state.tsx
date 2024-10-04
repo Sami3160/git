@@ -1,4 +1,3 @@
-import { useLocation } from "react-router-dom";
 import { atom, selector } from "recoil";
 
 export const sem1State = atom({

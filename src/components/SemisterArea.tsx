@@ -1,18 +1,18 @@
 import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from 'framer-motion';
-import { lazy, useRef, useState, Suspense } from 'react';
+import { useRef, useState } from 'react';
 
-import CardLoading from './CardLoading';
+// import CardLoading from './CardLoading';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
-const Subject = lazy(() => import("./Subject"));
+// const Subject = lazy(() => import("./Subject"));
 
 const SemisterArea = () => {
     const param = useParams()
 
     const navigate = useNavigate();
     const [sideBar, setSideBar] = useState(false);
-    const [subjectsArea, setSubjectsArea] = useState<any>();
+    // const [subjectsArea, setSubjectsArea] = useState<any>();
     const head = useRef<HTMLDivElement | null>(null);
     const contentArea = useRef<HTMLDivElement | null>(null);
     const queryParams = new URLSearchParams(location.search);
@@ -30,7 +30,7 @@ const SemisterArea = () => {
         setSideBar(state => !state);
     }
     function handleSem(eleContext: any): void {
-        const dept=param;
+        // const dept=param;
 
         let choice: string = eleContext.target.innerText;
         navigate('/notes'+'/' + choice+'?sub='+sub);

@@ -1,4 +1,4 @@
-import { faSearch, faHome, faContactBook, faUpload, faBook, faUser, faInfo } from "@fortawesome/free-solid-svg-icons";
+import {  faHome,  faUpload, faBook, faUser, faInfo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
 

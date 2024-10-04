@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
-import { db, app } from '../config/firebase.config';
-import { onSnapshot, getDocs } from 'firebase/firestore';
+import  { useEffect } from 'react'
+import { db } from '../config/firebase.config';
+import {  getDocs } from 'firebase/firestore';
 import { useRecoilValue } from 'recoil';
 import { getSubjectSem1 } from '../states/Sem1.state';
 import { useState } from 'react';
@@ -10,7 +10,7 @@ interface Department {
   id: string;
 }
 export default function UploadNotes() {
-  const [notes, setNotes] = useState<{ id: string }[]>([]);
+  // const [notes, setNotes] = useState<{ id: string }[]>([]);
   const [departmentNames, setDepartmentNames] = useState<Department[]>([]);
   const subject = useRecoilValue(getSubjectSem1);
 

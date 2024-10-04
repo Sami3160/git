@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 type SubjectProps = {
     name: string;
     totalC: number;
@@ -9,7 +9,6 @@ type SubjectProps = {
 }
 
 function Subject({name,totalC, questionC, notesC, onlineRefC, semId}: SubjectProps) :React.JSX.Element{
-    const navigator = useNavigate();
     const queryParams=new URLSearchParams(location.search);
     let sub = queryParams.get('sub');
     if(!sub)sub='cse';

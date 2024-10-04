@@ -1,4 +1,4 @@
-import React, { FormEvent, MouseEventHandler, useEffect, useRef, useState } from 'react';
+import React, {  useEffect, useRef, useState } from 'react';
 import { sem3State } from '../states/Sem3.state';
 import { sem4State } from '../states/Sem4.state';
 import { sem5State } from '../states/Sem5.state';
@@ -6,16 +6,16 @@ import { sem6State } from '../states/Sem6.state';
 import { sem7State } from '../states/Sem7.state';
 import { sem8State } from '../states/Sem8.state';
 import { storage } from '../config/firebase.config';
-import { getStorage, ref, uploadBytes } from 'firebase/storage';
+import { ref, uploadBytes } from 'firebase/storage';
 import { useRecoilState } from 'recoil';
 import {  useNavigate } from 'react-router-dom';
-interface Subject {
-    name: string;
-    totalC: number;
-    questionC: number;
-    notesC: number;
-    onlineRefC: number;
-}
+// interface Subject {
+//     name: string;
+//     totalC: number;
+//     questionC: number;
+//     notesC: number;
+//     onlineRefC: number;
+// }
 function UploadFile() {
     const btn = useRef<HTMLButtonElement>(null);
     const navigate = useNavigate();

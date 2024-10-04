@@ -2,8 +2,8 @@ import React from 'react';
 
 function AboutUs():React.ReactElement {
   return (
-    <div className="bg-gradient-to-r from-indigo-100 to-gray-200 py-12 px-6 py-3">
-       <h1 className="text-4xl text-center text-5xl font-extrabold text-indigo-700 mb-4 py-4 transition duration-300">
+    <div className="bg-gradient-to-r from-indigo-100 to-gray-200 py-12 px-6 ">
+       <h1 className=" text-center text-5xl font-extrabold text-indigo-700 mb-4 py-4 transition duration-300">
             About Us
           </h1>
           <hr className="border-t border-gray-800 my-4" /> 

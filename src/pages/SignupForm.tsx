@@ -28,7 +28,7 @@ const SignupForm: React.FC = () => {
     const [lname, setLname] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [invalid, setInvalid] = useState<string>('');
-    const [userExists, setUserExists] = useState<any>();
+    // const [userExists, setUserExists] = useState<any>();
     const usr = useRef<HTMLInputElement>(null)
     const ln = useRef<HTMLInputElement>(null)
     const rn = useRef<HTMLInputElement>(null)

@@ -1,4 +1,4 @@
-import { atom, selector, selectorFamily } from "recoil";
+import { atom,  selectorFamily } from "recoil";
 
 export const sem2State = atom({
     key: "sem2State",
@@ -17,7 +17,7 @@ export const sem2State = atom({
 
 export const dynamicSem2State = selectorFamily({
     key: "dynamicSem2State",
-    get: (sub) => ({ get }) => {
+    get: (sub) => ({  }) => {
         // const queryParams = new URLSearchParams(location.search);
         // const sub = queryParams.get('sub');
         switch (sub) {

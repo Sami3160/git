@@ -3,11 +3,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { app, db } from '../config/firebase.config';
-import { collection, getDocs, onSnapshot, query, where } from 'firebase/firestore';
+import { db } from '../config/firebase.config';
+import { collection, getDocs } from 'firebase/firestore';
 import "firebase/firestore";
-import firebase from 'firebase/compat/app';
-import jwt from 'jsonwebtoken';
 import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 // import { faUser, faLock } from 'react-icons/fa';
@@ -23,7 +21,6 @@ const LoginForm: React.FC = () => {
   // email s username....
   const [password, setPassword] = useState('');
   const [invalid, setInvalid] = useState<string>('');
-  const [userExists, setUserExists] = useState<any>();
   const usr = useRef<HTMLInputElement>(null)
   const passwd = useRef<HTMLInputElement>(null)
   useEffect(() => {

@@ -1,31 +1,24 @@
 import { useParams } from "react-router-dom";
-import { sem1State } from '../states/Sem1.state';
-import { sem2State, dynamicSem2State } from '../states/Sem2.state';
-import { sem3State ,dynamicSem3State} from '../states/Sem3.state';
-import { sem4State, dynamicSem4State } from '../states/Sem4.state';
-import { sem5State , dynamicSem5State} from '../states/Sem5.state';
-import { sem6State , dynamicSem6State} from '../states/Sem6.state';
-import { sem7State , dynamicSem7State} from '../states/Sem7.state';
-import { sem8State ,dynamicSem8State} from '../states/Sem8.state';
+import {  dynamicSem2State } from '../states/Sem2.state';
+import { dynamicSem3State} from '../states/Sem3.state';
+import {  dynamicSem4State } from '../states/Sem4.state';
+import {  dynamicSem5State} from '../states/Sem5.state';
+import {  dynamicSem6State} from '../states/Sem6.state';
+import {  dynamicSem7State} from '../states/Sem7.state';
+import { dynamicSem8State} from '../states/Sem8.state';
 import CardLoading from './CardLoading';
-import { Outlet } from 'react-router-dom';
 import { Suspense, useEffect } from 'react';
-import { lazy, useRef, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-import firebase from "firebase/compat/app";
+import { lazy,  useState } from "react";
+import { useRecoilValue } from "recoil";
 import { storage } from '../config/firebase.config';
 import { ref, listAll, getDownloadURL } from "firebase/storage";
-import { set } from "firebase/database";
-import { faL } from "@fortawesome/free-solid-svg-icons";
 
 const Subject = lazy(() => import("./Subject"));
 
 
 function SubSemisterArea() {
-    const arr = [1, 2, 3, 4]
     const [skeleton, setSkeleton] = useState(false);
     const [subjectsArea, setSubjectsArea] = useState<any>();
-    const head = useRef<HTMLDivElement | null>(null);
     const [documentsNotes, setDocumentsNotes] = useState<any>();
     const [referenceBooks, setReferenceBooks] = useState<any>();
     const [recommendedBooks, setRecommendedBooks] = useState<any>();
@@ -35,7 +28,6 @@ function SubSemisterArea() {
     let sub = queryParams.get('sub');
     if(!sub)sub='cse';
 
-    const contentArea = useRef<HTMLDivElement | null>(null);
     const sem1 = useRecoilValue(dynamicSem2State(sub));
     const sem2 = useRecoilValue(dynamicSem2State(sub));
     const sem3 = useRecoilValue(dynamicSem3State(sub));

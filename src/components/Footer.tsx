@@ -1,4 +1,3 @@
-import React from 'react';
 import { FaUniversity, FaEnvelope, FaPhone, FaExternalLinkAlt } from 'react-icons/fa';
 
 function Footer() {

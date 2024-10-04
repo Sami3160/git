@@ -1,4 +1,4 @@
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Navbar.css'
 import GIT from '../images/GIT.png'
 import { useState } from 'react';
