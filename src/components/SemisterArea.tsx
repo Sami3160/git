@@ -15,7 +15,9 @@ const SemisterArea = () => {
     const [subjectsArea, setSubjectsArea] = useState<any>();
     const head = useRef<HTMLDivElement | null>(null);
     const contentArea = useRef<HTMLDivElement | null>(null);
-
+    const queryParams = new URLSearchParams(location.search);
+    let sub:any = queryParams.get('sub');
+    if(!sub)sub='cse';
 
     function onHideClick() {
         if (sideBar && head.current) {
@@ -28,8 +30,13 @@ const SemisterArea = () => {
         setSideBar(state => !state);
     }
     function handleSem(eleContext: any): void {
+        const dept=param;
+
         let choice: string = eleContext.target.innerText;
-        navigate('/notes/' + choice);
+        navigate('/notes'+'/' + choice+'?sub='+sub);
+        // navigate('/notes?sub='+sub+'/' + choice);
+        // navigate(`/notes?sub=${sub}/${choice}`);
+
 
     }
     return (

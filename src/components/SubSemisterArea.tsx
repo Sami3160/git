@@ -1,17 +1,17 @@
 import { useParams } from "react-router-dom";
 import { sem1State } from '../states/Sem1.state';
-import { sem2State } from '../states/Sem2.state';
-import { sem3State } from '../states/Sem3.state';
-import { sem4State } from '../states/Sem4.state';
-import { sem5State } from '../states/Sem5.state';
-import { sem6State } from '../states/Sem6.state';
-import { sem7State } from '../states/Sem7.state';
-import { sem8State } from '../states/Sem8.state';
+import { sem2State, dynamicSem2State } from '../states/Sem2.state';
+import { sem3State ,dynamicSem3State} from '../states/Sem3.state';
+import { sem4State, dynamicSem4State } from '../states/Sem4.state';
+import { sem5State , dynamicSem5State} from '../states/Sem5.state';
+import { sem6State , dynamicSem6State} from '../states/Sem6.state';
+import { sem7State , dynamicSem7State} from '../states/Sem7.state';
+import { sem8State ,dynamicSem8State} from '../states/Sem8.state';
 import CardLoading from './CardLoading';
 import { Outlet } from 'react-router-dom';
 import { Suspense, useEffect } from 'react';
 import { lazy, useRef, useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import firebase from "firebase/compat/app";
 import { storage } from '../config/firebase.config';
 import { ref, listAll, getDownloadURL } from "firebase/storage";
@@ -31,16 +31,22 @@ function SubSemisterArea() {
     const [recommendedBooks, setRecommendedBooks] = useState<any>();
     const [questionBanks, setQuestionBanks] = useState<any>();
     const [syllabus, setSyllabus] = useState<any>();
+    const queryParams=new URLSearchParams(location.search)
+    let sub = queryParams.get('sub');
+    if(!sub)sub='cse';
 
     const contentArea = useRef<HTMLDivElement | null>(null);
-    const [sem1, setSem1] = useRecoilState(sem1State);
-    const [sem2, setSem2] = useRecoilState(sem2State);
-    const [sem3, setSem3] = useRecoilState(sem3State);
-    const [sem4, setSem4] = useRecoilState(sem4State);
-    const [sem5, setSem5] = useRecoilState(sem5State);
-    const [sem6, setSem6] = useRecoilState(sem6State);
-    const [sem7, setSem7] = useRecoilState(sem7State);
-    const [sem8, setSem8] = useRecoilState(sem8State);
+    const sem1 = useRecoilValue(dynamicSem2State(sub));
+    const sem2 = useRecoilValue(dynamicSem2State(sub));
+    const sem3 = useRecoilValue(dynamicSem3State(sub));
+    const sem4 = useRecoilValue(dynamicSem4State(sub));
+    const sem5 = useRecoilValue(dynamicSem5State(sub));
+    const sem6 = useRecoilValue(dynamicSem6State(sub));
+    const sem7 = useRecoilValue(dynamicSem7State(sub));
+    const sem8 = useRecoilValue(dynamicSem8State(sub));
+    // console.log(sem5);
+    // console.log(sem2);
+    // console.log(sem3);
     interface Subject {
         name: string;
         totalC: number;
@@ -48,7 +54,7 @@ function SubSemisterArea() {
         notesC: number;
         onlineRefC: number;
     }
-    const semDatRef: Record<string, typeof sem1> = {
+    const semDatRef: Record<string, typeof sem3> = {
         "Sem-I": sem1,
         "Sem-II": sem2,
         "Sem-III": sem3,
@@ -80,11 +86,11 @@ function SubSemisterArea() {
             setSyllabus(undefined)
             setSkeleton(true)
             if (semId && subject) {
-                const DocumentsNotesRef = ref(storage, `Department Notes/CSE/${semFolderRef[semId]}/${subject}/Documents Notes/`);
-                const QuestionBanksRef = ref(storage, `Department Notes/CSE/${semFolderRef[semId]}/${subject}/Question Banks/`);
-                const RecommendedBooksRef = ref(storage, `Department Notes/CSE/${semFolderRef[semId]}/${subject}/Recommended Books/`)
-                const ReferenceBooksRef = ref(storage, `Department Notes/CSE/${semFolderRef[semId]}/${subject}/Reference Books/`)
-                const SyllabusRef = ref(storage, `Department Notes/CSE/${semFolderRef[semId]}/${subject}/Syllabus/`)
+                const DocumentsNotesRef = ref(storage, `Department Notes/${sub.toUpperCase()}/${semFolderRef[semId]}/${subject}/Documents Notes/`);
+                const QuestionBanksRef = ref(storage, `Department Notes/${sub.toUpperCase()}/${semFolderRef[semId]}/${subject}/Question Banks/`);
+                const RecommendedBooksRef = ref(storage, `Department Notes/${sub.toUpperCase()}/${semFolderRef[semId]}/${subject}/Recommended Books/`)
+                const ReferenceBooksRef = ref(storage, `Department Notes/${sub.toUpperCase()}/${semFolderRef[semId]}/${subject}/Reference Books/`)
+                const SyllabusRef = ref(storage, `Department Notes/${sub.toUpperCase()}/${semFolderRef[semId]}/${subject}/Syllabus/`)
                 const res1 = await listAll(DocumentsNotesRef);
                 const Docres = await Promise.all(
                     res1.items.map(async item => {

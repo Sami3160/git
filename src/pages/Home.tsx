@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom'
 import "./Home.css"
 
 import bg from '../images/parallexpt1.jpg'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 function Home() {
     const ref = useRef(null)
@@ -21,6 +21,9 @@ function Home() {
         target: ref2,
         offset: ["start start", "end start"]
     })
+    useEffect(() => {
+        document.title = "Welcome to GIT Knowledge Hub"
+    }, [])
     const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "200%"])
     const textY = useTransform(scrollYProgress, [0, 1], ["0%", "300%"])
     const card = useTransform(scrollP2, [0, 1], ["0%", "100%"])
@@ -95,9 +98,9 @@ function Home() {
 
 
             {/* special button */}
-            <motion.div className="special w-full my-10 flex flex-col justify-center items-center" >
+            <motion.div className="special w-full mt-10 flex flex-col justify-center items-center" >
 
-                <NavLink to={"/notes"}>
+                <NavLink to={"/notes?sub=cse"}>
 
                     <div className="button mx-auto">
                         <motion.div
@@ -122,7 +125,7 @@ function Home() {
 
 
             <div ref={ref2} className=''>
-                <div className='text-5xl mt-12 font-sans flex flex-auto justify-center z-32 text-[#333A73] p-4 mb-0'>
+                <div className='text-5xl mt-8 font-sans flex flex-auto justify-center z-32 text-[#333A73] p-4 mb-0'>
                     Total content on the website
                 </div>
             </div>
@@ -151,7 +154,7 @@ function Home() {
                     <motion.div
                         initial={{ x: -100, opacity: 0, filter: 'blur(10px)' }}
                         whileInView={{ x: 0, opacity: 1, filter: 'blur(0px)' }}
-                       transition={{ duration: 0.5, type: 'spring', stiffness: 100, damping: 10, delay: 0.2 }}
+                        transition={{ duration: 0.5, type: 'spring', stiffness: 100, damping: 10, delay: 0.2 }}
                         className="card relative col-span-1 w-full h-56 p-2 z-10">
                         <div className="cardContent p-2 shadow-xl mx-auto sm:mx-0 md:mx-auto rounded-lg w-[50%] sm:w-full md:w-[70%] h-full bg-[#50C4ED] border-[8px] opacity-[0.7] border-[#387ADF]">
                             <div className="title text-2xl  text-center">Total Question</div>
@@ -165,7 +168,7 @@ function Home() {
                     <motion.div
                         initial={{ x: -100, opacity: 0, filter: 'blur(10px)' }}
                         whileInView={{ x: 0, opacity: 1, filter: 'blur(0px)' }}
-                       transition={{ duration: 0.5, type: 'spring', stiffness: 100, damping: 10, delay: 0.6 }}
+                        transition={{ duration: 0.5, type: 'spring', stiffness: 100, damping: 10, delay: 0.6 }}
                         className="card relative col-span-1 w-full h-56  p-2 z-10">
                         <div className="cardContent p-2 shadow-xl mx-auto  sm:mx-0 md:mx-auto rounded-lg w-[50%] sm:w-full md:w-[70%] h-full bg-[#50C4ED] border-[8px] opacity-[0.7] border-[#387ADF]">
                             <div className="title text-2xl  text-center">Total Notes</div>
@@ -186,32 +189,44 @@ function Home() {
                 <div className="info  space-y-4 bg-[#001829]">
                     <div className="cardType2 flex flex-row justify-between items-center ">
                         <div className='h-auto w-[34rem] '>
-                            <img src={temp} alt="" />
+                            <img src={"src/assets/card1.jpeg"} alt="" />
                         </div>
-                        <div className='text-xl md:text-4xl '>The Gharda Institute Of Technolygy...</div>
-                    </div>
-
-
-                    <div className="cardType2 flex flex-row justify-between items-center ">
-                        <div className='text-xl md:text-4xl '>The Gharda Institute Of Technolygy...</div>
-                        <div className='h-auto w-[34rem] '>
-                            <img src={temp} alt="" />
+                        <div className='text-xl  p-8 w-[60%] flex flex-col gap-2 justify-start'>
+                            <p className='text-4xl font-bold'>Notes Repository</p>
+                            <p className='text-2xl'>Access a vast collection of notes, subject-wise and department-wise.</p>
                         </div>
                     </div>
 
 
                     <div className="cardType2 flex flex-row justify-between items-center ">
-                        <div className='h-auto w-[34rem] '>
-                            <img src={temp} alt="" />
+                        <div className='text-xl  p-8 w-[60%] flex flex-col gap-2 justify-start'>
+                            <p className='text-4xl font-bold'>Past Question Papers</p>
+                            <p className='text-2xl'>Find previous years' question papers to help with exam preparation.</p>
                         </div>
-                        <div className='text-xl md:text-4xl '>The Gharda Institute Of Technolygy...</div>
+                        <div className='h-auto w-[34rem] '>
+                            <img src={"src/assets/question.png"} alt="" />
+                        </div>
                     </div>
 
 
                     <div className="cardType2 flex flex-row justify-between items-center ">
-                        <div className='text-xl md:text-4xl '>The Gharda Institute Of Technolygy...</div>
                         <div className='h-auto w-[34rem] '>
-                            <img src={temp} alt="" />
+                            <img src={"src/assets/assignment.jpeg"} alt="" />
+                        </div>
+                        <div className='text-xl  p-8 w-[60%] flex flex-col gap-2 justify-start'>
+                            <p className='text-4xl font-bold'>Assignments & Projects</p>
+                            <p className='text-2xl'>Explore sample assignments and project ideas.</p>
+                        </div>
+                    </div>
+
+
+                    <div className="cardType2 flex flex-row justify-between items-center ">
+                        <div className='text-xl  p-8 w-[60%] flex flex-col gap-2 justify-start'>
+                            <p className='text-4xl font-bold'>Study Material</p>
+                            <p className='text-2xl'>Curated study material including books, articles, and videos.</p>
+                        </div>
+                        <div className='h-auto w-[34rem] '>
+                            <img src={"src/assets/study.png"} alt="" />
                         </div>
                     </div>
                 </div>

@@ -1,47 +1,98 @@
 import React from 'react';
+import { FaUniversity, FaEnvelope, FaPhone, FaExternalLinkAlt } from 'react-icons/fa';
 
-function Footer(){
-    return (
-        <footer className="bg-gray-900 text-white py-4 ">
-            <div className="container mx-auto grid grid-rows-4 sm:grid-cols-4 sm:grid-rows-1">
-                <div className="links row-span-1 sm:col-span-1">
-                    <h2>Imp Links</h2>
-                    <ul>
-                        <li>Instutute Membership</li>
-                        <li>GIT Social Accountability</li>
-                        <li>Collage prospectus</li>
-                    </ul>
-                </div>
-                <div className="quicklinks row-span-1 sm:col-span-1">
-                    <h2>Quick Links</h2>
-                    <ul>
-                        <li>About Us</li>
-                        <li>Webmail</li>
-                        <li>Sitemap</li>
-                    </ul>
-                </div>
-                <div className="portals row-span-1 sm:col-span-1">
-                    <h2>Portals</h2>
-                    <ul>
-                        <li>Mumbai University</li>
-                        <li>Directorate Of Technical Eductaion</li>
-                        <li>NAAC</li>
-                    </ul>
-                </div>
-                <div className="contact row-span-1 sm:col-span-1">
-                    <h2>Contact</h2>
-                    <h3>Gharda Institute Of Technology</h3>
-                    <ul>
-                        <li>9422152788 Registrar</li>
-                        <li>9822765402 Academics</li>
-                        <li>9420376273 Accounts</li>
-                        <li>7798312364 Exam</li>
-                        <li>Email: principal@git-india.edu.in</li>
-                    </ul>
-                </div>
-            </div>
-        </footer>
-    );
-};
+function Footer() {
+  return (
+    <footer className="bg-gray-800 text-gray-300 py-10">
+      <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 px-6">
+        
+        <div className="space-y-4">
+          <h2 className="text-lg font-semibold text-white">Important Links</h2>
+          <ul className="space-y-2">
+            <li className="flex items-center">
+              <FaExternalLinkAlt className="mr-2" />
+              <span>Institute Membership</span>
+            </li>
+            <li className="flex items-center">
+              <FaExternalLinkAlt className="mr-2" />
+              <span>GIT Social Accountability</span>
+            </li>
+            <li className="flex items-center">
+              <FaExternalLinkAlt className="mr-2" />
+              <span>College Prospectus</span>
+            </li>
+          </ul>
+        </div>
+
+        <div className="space-y-4">
+          <h2 className="text-lg font-semibold text-white">Quick Links</h2>
+          <ul className="space-y-2">
+            <li className="flex items-center">
+              <FaExternalLinkAlt className="mr-2" />
+              <span>About Us</span>
+            </li>
+            <li className="flex items-center">
+              <FaExternalLinkAlt className="mr-2" />
+              <span>Webmail</span>
+            </li>
+            <li className="flex items-center">
+              <FaExternalLinkAlt className="mr-2" />
+              <span>Sitemap</span>
+            </li>
+          </ul>
+        </div>
+
+        <div className="space-y-4">
+          <h2 className="text-lg font-semibold text-white">Portals</h2>
+          <ul className="space-y-2">
+            <li className="flex items-center">
+              <FaUniversity className="mr-2" />
+              <span>Mumbai University</span>
+            </li>
+            <li className="flex items-center">
+              <FaUniversity className="mr-2" />
+              <span>Directorate Of Technical Education</span>
+            </li>
+            <li className="flex items-center">
+              <FaUniversity className="mr-2" />
+              <span>NAAC</span>
+            </li>
+          </ul>
+        </div>
+
+        <div className="space-y-4">
+          <h2 className="text-lg font-semibold text-white">Contact</h2>
+          <h3 className="text-white font-medium">Gharda Institute Of Technology</h3>
+          <ul className="space-y-2">
+            <li className="flex items-center">
+              <FaPhone className="mr-2" />
+              <span>9422152788 Registrar</span>
+            </li>
+            <li className="flex items-center">
+              <FaPhone className="mr-2" />
+              <span>9822765402 Academics</span>
+            </li>
+            <li className="flex items-center">
+              <FaPhone className="mr-2" />
+              <span>9420376273 Accounts</span>
+            </li>
+            <li className="flex items-center">
+              <FaPhone className="mr-2" />
+              <span>7798312364 Exam</span>
+            </li>
+            <li className="flex items-center">
+              <FaEnvelope className="mr-2" />
+              <span>Email: principal@git-india.edu.in</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+      <div className="text-center text-sm text-gray-500 mt-8">
+        © {new Date().getFullYear()} Gharda Institute Of Technology. All Rights Reserved.
+      </div>
+    </footer>
+  );
+}
 
 export default Footer;

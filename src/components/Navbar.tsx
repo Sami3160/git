@@ -1,8 +1,8 @@
 import { Link, NavLink } from 'react-router-dom';
 import './Navbar.css'
 import GIT from '../images/GIT.png'
+import { useState } from 'react';
 function Navbar() {
-
 
     return (
         // <div className='navbar'>
@@ -49,6 +49,8 @@ function Navbar() {
 
 
 function Navbar2(){
+    const [modal, showModal] = useState(false);
+    
     return (
 
 
@@ -69,8 +71,28 @@ function Navbar2(){
                         <li>
                             <NavLink to="/" className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Home</NavLink>
                         </li>
-                        <li>
-                            <NavLink to="/notes" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Visit Notes</NavLink>
+                        <li onMouseEnter={()=>showModal(true)} className='relative'
+                            onMouseLeave={()=>showModal(false)}
+                            >
+                            {modal && (
+                                <div>
+                                    <ul className="absolute -top-[16px] z-20 left-0 w-48 p-4 mt-10 bg-white border border-gray-100 rounded-lg shadow-lg dark:bg-gray-800 dark:border-gray-700">
+                                        <li>
+                                            <NavLink to="/notes?sub=cse" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">CSE</NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink to="/notes?sub=mech" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">MECH</NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink to="/notes?sub=entc" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">E&TC</NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink to="/notes?sub=civil" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Civil</NavLink>
+                                        </li>
+                                    </ul>
+                                </div>
+                            )}
+                            <NavLink to="/notes?sub=cse" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Visit Notes</NavLink>
                         </li>
                         <li>
                             <NavLink to="/upload" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Request Upload</NavLink>

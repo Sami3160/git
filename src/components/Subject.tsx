@@ -10,10 +10,9 @@ type SubjectProps = {
 
 function Subject({name,totalC, questionC, notesC, onlineRefC, semId}: SubjectProps) :React.JSX.Element{
     const navigator = useNavigate();
-    function handleSubjectClick(){
-        navigator('/notes/')
-        console.log('Subject Clicked');
-    }
+    const queryParams=new URLSearchParams(location.search);
+    let sub = queryParams.get('sub');
+    if(!sub)sub='cse';
     return (
         <div className="card bg-white p-2 rounded-lg shadow-2xl ">
             <div className="title text-2xl font-bold">{name}</div>
@@ -24,7 +23,7 @@ function Subject({name,totalC, questionC, notesC, onlineRefC, semId}: SubjectPro
                 <div className="text-sm">Notes: {notesC}</div>
                 <div className="text-sm">Available Notes: {onlineRefC}</div>
             </div>
-            <NavLink to={`/notes/${semId}/${name}`}>  
+            <NavLink to={`/notes/${semId}/${name}?sub=${sub}`}>  
 
             <div className="content text-lg cursor-pointer text-center">View Notes</div>
             </NavLink>

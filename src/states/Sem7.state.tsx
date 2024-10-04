@@ -1,4 +1,4 @@
-import { atom, selector } from "recoil";
+import { atom, selector, selectorFamily } from "recoil";
 
 export const sem7State = atom({
     key: "sem7State",
@@ -15,3 +15,66 @@ export const sem7State = atom({
 
 
 
+
+export const dynamicSem7State = selectorFamily({
+    key: "dynamicSem7State",
+    get:(sub)=> ({ get }) => {
+        // const queryParams = new URLSearchParams(location.search);
+        // const sub = queryParams.get('sub');
+        switch (sub) {
+          case 'cse':
+            return [
+              { name: "Maths" , totalC: 0,  questionC:11, notesC:6, onlineRefC:0 },
+              { name: "Science" , totalC: 0, questionC:11, notesC:6, onlineRefC:0 },
+              { name: "Computer Pheripherals" , totalC: 0, questionC:11, notesC:6, onlineRefC:0 },
+              { name: "Chemistry" , totalC: 0, questionC:11, notesC:6, onlineRefC:0 },
+              { name: "Physics" , totalC: 0, questionC:11, notesC:6, onlineRefC:0 },
+              { name: "" , totalC: 0, questionC:11, notesC:6, onlineRefC:0 }
+            ]
+            break;
+          case 'mech':
+            return [
+              { name: "Maths" , totalC: 0,  questionC:11, notesC:6, onlineRefC:0 },
+              { name: "Science" , totalC: 0, questionC:11, notesC:6, onlineRefC:0 },
+              { name: "Computer Pheripherals" , totalC: 0, questionC:11, notesC:6, onlineRefC:0 },
+              { name: "Chemistry" , totalC: 0, questionC:11, notesC:6, onlineRefC:0 },
+              { name: "Physics" , totalC: 0, questionC:11, notesC:6, onlineRefC:0 },
+              { name: "" , totalC: 0, questionC:11, notesC:6, onlineRefC:0 }
+            ]
+            break;
+          case 'entc':
+            return [
+                { name: "Microwave Engineering" , totalC: 0,  questionC:11, notesC:6, onlineRefC:0 },
+                { name: "Mobile Communication System" , totalC: 0, questionC:11, notesC:6, onlineRefC:0 },
+                { name: "DLOC3: Deep Learning" , totalC: 0, questionC:11, notesC:6, onlineRefC:0 },
+                { name: "DLOC4: Internet Communication Engineering" , totalC: 0, questionC:11, notesC:6, onlineRefC:0 },
+                { name: "ILOC: Cyber Security and Laws" , totalC: 0, questionC:11, notesC:6, onlineRefC:0 },
+                 ]
+            break;
+          case 'civil':
+            return [
+              { name: "Maths" , totalC: 0,  questionC:11, notesC:6, onlineRefC:0 },
+              { name: "Science" , totalC: 0, questionC:11, notesC:6, onlineRefC:0 },
+              { name: "Computer Pheripherals" , totalC: 0, questionC:11, notesC:6, onlineRefC:0 },
+              { name: "Chemistry" , totalC: 0, questionC:11, notesC:6, onlineRefC:0 },
+              { name: "Physics" , totalC: 0, questionC:11, notesC:6, onlineRefC:0 },
+              { name: "" , totalC: 0, questionC:11, notesC:6, onlineRefC:0 }
+            ]
+            break;
+          default:
+            return [
+              { name: "Maths" , totalC: 0,  questionC:11, notesC:6, onlineRefC:0 },
+              { name: "Science" , totalC: 0, questionC:11, notesC:6, onlineRefC:0 },
+              { name: "Computer Pheripherals" , totalC: 0, questionC:11, notesC:6, onlineRefC:0 },
+              { name: "Chemistry" , totalC: 0, questionC:11, notesC:6, onlineRefC:0 },
+              { name: "Physics" , totalC: 0, questionC:11, notesC:6, onlineRefC:0 },
+              { name: "" , totalC: 0, questionC:11, notesC:6, onlineRefC:0 }
+            ]
+            break;
+        }
+       
+    }
+  });
+  
+  
+  
