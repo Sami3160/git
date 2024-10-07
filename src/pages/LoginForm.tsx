@@ -3,11 +3,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { db } from '../config/firebase.config';
+import { auth, db } from '../config/firebase.config';
 import { collection, getDocs } from 'firebase/firestore';
 import "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 // import { faUser, faLock } from 'react-icons/fa';
 
 
@@ -40,31 +41,53 @@ const LoginForm: React.FC = () => {
       // usr.current?.classList.add("")
     } else {
       try {
-        const admins = collection(db, 'admins')
-        const querySnapshot = await getDocs(admins);
-        // const departmentNamesArray: any[] = [];
-        querySnapshot.forEach(doc => {
-          console.log(doc.data());
-          if (doc.data().email === username && doc.data().password === password) {
-            validAdmin.push(doc.data())
+        // const admins = collection(db, 'admins')
+        // const querySnapshot = await getDocs(admins);
+        // // const departmentNamesArray: any[] = [];
+        // querySnapshot.forEach(doc => {
+        //   console.log(doc.data());
+        //   if (doc.data().email === username && doc.data().password === password) {
+        //     validAdmin.push(doc.data())
 
-          }
-        });
+        //   }
+        // });
 
-        if (validAdmin.length == 0) {
-          setInvalid("invalid")
-          setTimeout(() => setInvalid(""), 2000)
-        } else {
-          const expiryDate = new Date();
-          expiryDate.setHours(expiryDate.getHours() + 1); 
+        // if (validAdmin.length == 0) {
+        //   setInvalid("invalid")
+        //   setTimeout(() => setInvalid(""), 2000)
+        // } else {
+        //   const expiryDate = new Date();
+        //   expiryDate.setHours(expiryDate.getHours() + 1); 
 
-          const newtoken = `${username}_${expiryDate.getTime()}`;
+        //   const newtoken = `${username}_${expiryDate.getTime()}`;
 
-          localStorage.setItem("user", newtoken);
-          localStorage.setItem('email', username);
-          navigate('/admin')
-          setInvalid("")
-        }
+        //   localStorage.setItem("user", newtoken);
+        //   localStorage.setItem('email', username);
+        //   navigate('/admin')
+        //   setInvalid("")
+        // }
+
+        await signInWithEmailAndPassword(auth, username, password)
+          .then((userCredential) => {
+            const user = userCredential.user
+            const expiryDate = new Date();
+            expiryDate.setHours(expiryDate.getHours() + 1);
+
+            const newtoken = `${user}_${expiryDate.getTime()}`;
+
+            localStorage.setItem("user", newtoken);
+            localStorage.setItem('email', username);
+            setInvalid("")
+            navigate('/admin')
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode, errorMessage)
+            setInvalid("")
+            setTimeout(() => setInvalid(""), 2000)
+          })
+
       } catch (error) {
         console.log(error);
 

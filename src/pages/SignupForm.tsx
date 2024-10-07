@@ -2,30 +2,21 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faLock, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import { collection, doc, getDocs, setDoc } from "firebase/firestore";
-import { db } from "../config/firebase.config";
+import { auth, db } from "../config/firebase.config";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { NavLink } from "react-router-dom";
+import { doc, setDoc } from "firebase/firestore";
 const SignupForm: React.FC = () => {
-    // const [formData, setFormData] = useState({
-    //     firstName: "",
-    //     lastName: "",
-    //     email: "",
-    //     password: "",
-    // });
-
-
     const Errors = {
         "empty": "Please fill all fields.",
-        // "wrong": "Please fill all fields.",
         "invalid": "Email is used by someone else."
     }
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const navigate = useNavigate();
-    // email s username....
-    const [fname, setFname] = useState<string>('');
-    const [lname, setLname] = useState<string>('');
+    // email s email....
+    const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [invalid, setInvalid] = useState<string>('');
     // const [userExists, setUserExists] = useState<any>();
@@ -42,53 +33,83 @@ const SignupForm: React.FC = () => {
 
     const handleSignUp = async () => {
         let validAdmin = [];
+        email.trim()
+        // fname.trim()
         username.trim()
-        fname.trim()
-        lname.trim()
         password.trim()
-        if (username.length == 0 || password.length == 0 || fname.length == 0 || lname.length == 0) {
+        if (email.length == 0 || password.length == 0  || username.length == 0) {
             setInvalid("empty")
             setTimeout(() => setInvalid(""), 3000)
             // usr.current?.classList.add("")
         } else {
-            try {
-                const admins = collection(db, 'admins')
-                const querySnapshot = await getDocs(admins);
-                // const departmentNamesArray: any[] = [];
-                querySnapshot.forEach(doc => {
-                    console.log(doc.data());
-                    if (doc.data().email === username) {
-                        validAdmin.push(doc.data())
-                    }
-                });
+            // try {
+            //     const admins = collection(db, 'admins')
+            //     const querySnapshot = await getDocs(admins);
+            //     // const departmentNamesArray: any[] = [];
+            //     querySnapshot.forEach(doc => {
+            //         console.log(doc.data());
+            //         if (doc.data().email === email) {
+            //             validAdmin.push(doc.data())
+            //         }
+            //     });
 
-                if (validAdmin.length > 0) {
-                    setInvalid("invalid")
-                    setTimeout(() => setInvalid(""), 2000)
-                } else {
-                    const docRef = doc(db, "admins")
-                    const data = {
-                        "first name": fname,
-                        "last name": lname,
-                        email: username,
-                        password: password,
-                    };
-                    await setDoc(docRef, data);
+            //     if (validAdmin.length > 0) {
+            //         setInvalid("invalid")
+            //         setTimeout(() => setInvalid(""), 2000)
+            //     } else {
+            //         const docRef = doc(db, "admins")
+            //         const data = {
+            //             "first name": fname,
+            //             "last name": lname,
+            //             email: email,
+            //             password: password,
+            //         };
+            //         await setDoc(docRef, data);
 
+            //         const expiryDate = new Date();
+            //         expiryDate.setHours(expiryDate.getHours() + 1);
+
+            //         const newtoken = `${email}_${expiryDate.getTime()}`;
+
+            //         localStorage.setItem("user", newtoken);
+            //         localStorage.setItem('email', email);
+            //         navigate('/admin')
+            //         setInvalid("")
+            //     }
+            // } catch (error) {
+            //     console.log(error);
+
+            // }
+
+            await createUserWithEmailAndPassword(auth, email, password)
+                .then(async (userCredentials) => {
+                    const user = userCredentials.user
+                    console.log(user)
+                    await setDoc(doc(db, 'users', user.uid), {
+                        username: username,
+                        contact:"89898989",
+                        
+                    })
                     const expiryDate = new Date();
                     expiryDate.setHours(expiryDate.getHours() + 1);
 
-                    const newtoken = `${username}_${expiryDate.getTime()}`;
+
+                    const newtoken = `${email}_${expiryDate.getTime()}`;
 
                     localStorage.setItem("user", newtoken);
-                    localStorage.setItem('email', username);
-                    navigate('/admin')
+                    localStorage.setItem('email', email);
                     setInvalid("")
-                }
-            } catch (error) {
-                console.log(error);
-
-            }
+                    alert("user created")
+                    navigate('/admin')
+                    // navigate("/login")
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.log(errorCode, errorMessage);
+                    setInvalid("")
+                    setTimeout(() => setInvalid(""), 2000)
+                });
         }
 
 
@@ -106,17 +127,17 @@ const SignupForm: React.FC = () => {
             {/* email */}
             <div className="mb-4">
                 <label htmlFor="fname" className="text-sm font-medium text-gray-700">
-                    First Name
+                    Username
                 </label>
                 <div className="relative mt-1">
                     <input
                         id="fname"
                         type="text"
                         className="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 pl-10"
-                        placeholder="Enter your first name"
-                        value={fname}
+                        placeholder="Enter a username"
+                        value={username}
                         ref={rn}
-                        onChange={(e) => setFname(e.target.value)}
+                        onChange={(e) => setUsername(e.target.value)}
                     />
 
                     <span className="absolute left-3 top-1/2 transform -translate-y-1/2">
@@ -125,47 +146,26 @@ const SignupForm: React.FC = () => {
                     </span>
                 </div>
             </div>
-            {/* email */}
+           
             <div className="mb-4">
-                <label htmlFor="lname" className="text-sm font-medium text-gray-700">
-                    Last Name
-                </label>
-                <div className="relative mt-1">
-                    <input
-                        id="lname"
-                        type="text"
-                        className="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 pl-10"
-                        placeholder="Enter your last name"
-                        value={lname}
-                        ref={ln}
-                        onChange={(e) => setLname(e.target.value)}
-                    />
-
-                    <span className="absolute left-3 top-1/2 transform -translate-y-1/2">
-                        <FontAwesomeIcon icon={faUser} className="h-6 w-6" />
-
-                    </span>
-                </div>
-            </div>
-            <div className="mb-4">
-                <label htmlFor="username" className="text-sm font-medium text-gray-700">
+                <label htmlFor="email" className="text-sm font-medium text-gray-700">
                     Email
                 </label>
 
                 {/* email */}
                 <div className="relative mt-1">
                     <input
-                        id="username"
+                        id="email"
                         type="text"
                         className="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 pl-10"
                         placeholder="Enter your email"
-                        value={username}
+                        value={email}
                         ref={usr}
-                        onChange={(e) => setUsername(e.target.value)}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
 
                     <span className="absolute left-3 top-1/2 transform -translate-y-1/2">
-                        <FontAwesomeIcon icon={faUser} className="h-6 w-6" />
+                        <FontAwesomeIcon icon={faEnvelope} className="h-6 w-6" />
 
                     </span>
                 </div>

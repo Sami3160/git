@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOut, faUser } from "@fortawesome/free-solid-svg-icons";
 import { faBook } from "@fortawesome/free-solid-svg-icons/faBook";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../config/firebase.config";
 
 interface AdminDashboardProps {
 
@@ -12,6 +14,19 @@ interface AdminDashboardProps {
 const AdminDashboard: React.FC<AdminDashboardProps> = () => {
     const navigate = useNavigate();
     const token: any = localStorage.getItem("user")
+    const [userId, setUserId] =useState<string | undefined>('');
+    useEffect(()=>{
+        document.title = "Admin Dashboard"
+        onAuthStateChanged(auth, (user)=>{
+            if(user){
+                const uid=user?.uid;
+                setUserId(uid);
+            }else{
+                handleLogout();
+                // navigate("/login")
+            }
+        })
+    },[])
 
     useEffect(() => {
         document.title = "Admin Dashboard"
@@ -32,9 +47,19 @@ const AdminDashboard: React.FC<AdminDashboardProps> = () => {
 
     }, [])
     const handleLogout=()=>{
-        localStorage.removeItem('user')
-        localStorage.removeItem('email')
-        navigate("/login")
+        // localStorage.removeItem('user')
+        // localStorage.removeItem('email')
+        // navigate("/login")
+
+        signOut(auth)
+        .then(()=>{
+            navigate("/")
+            console.log("sihnout successfully");
+        }).catch((error)=>{
+            alert("error in sigbnout")
+            console.log(error);
+            
+        })
     }
     return (
         <div>
