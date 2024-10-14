@@ -14,19 +14,19 @@ interface AdminDashboardProps {
 const AdminDashboard: React.FC<AdminDashboardProps> = () => {
     const navigate = useNavigate();
     const token: any = localStorage.getItem("user")
-    const [userId, setUserId] =useState<string | undefined>('');
-    useEffect(()=>{
+    const [userId, setUserId] = useState<string | undefined>('');
+    useEffect(() => {
         document.title = "Admin Dashboard"
-        onAuthStateChanged(auth, (user)=>{
-            if(user){
-                const uid=user?.uid;
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const uid = user?.uid;
                 setUserId(uid);
-            }else{
+            } else {
                 handleLogout();
                 // navigate("/login")
             }
         })
-    },[])
+    }, [])
 
     useEffect(() => {
         document.title = "Admin Dashboard"
@@ -37,6 +37,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = () => {
             const expectedEmail = localStorage.getItem('email');
 
             if (email !== expectedEmail || expiryDate < new Date()) {
+
                 // The token is invalid or expired
                 navigate("/login")
             }
@@ -46,23 +47,30 @@ const AdminDashboard: React.FC<AdminDashboardProps> = () => {
 
 
     }, [])
-    const handleLogout=()=>{
+    const handleLogout = () => {
         // localStorage.removeItem('user')
         // localStorage.removeItem('email')
         // navigate("/login")
 
         signOut(auth)
-        .then(()=>{
-            navigate("/")
-            console.log("sihnout successfully");
-        }).catch((error)=>{
-            alert("error in sigbnout")
-            console.log(error);
-            
-        })
+            .then(() => {
+                localStorage.removeItem('token')
+                localStorage.removeItem('user')
+                localStorage.removeItem('email')
+                navigate("/")
+                console.log("signout successfully");
+            }).catch((error) => {
+                alert("error in sigbnout")
+                console.log(error);
+
+            })
     }
     return (
-        <div>
+        <div className="mx-20">
+            <p className="text-6xl font-extrabold  my-10 ">Welcome to Dashboard</p>
+            <p className="text-xl font-normal  text-slate-800">Available Notes Content</p>
+            <VisitStats />
+
 
             <motion.div
                 initial={{ opacity: 0, y: 50 }}
@@ -105,7 +113,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = () => {
 
                 <div className="group relative">
                     <button onClick={handleLogout}>
-                        <FontAwesomeIcon icon={faSignOut} className="h-6 w-6"/>
+                        <FontAwesomeIcon icon={faSignOut} className="h-6 w-6" />
                     </button>
                     <span className="absolute -top-14 left-[50%] -translate-x-[50%] 
                                 z-20 origin-left scale-0 px-3 rounded-lg border 
@@ -124,3 +132,37 @@ const AdminDashboard: React.FC<AdminDashboardProps> = () => {
 }
 
 export default AdminDashboard;
+
+function VisitStats() {
+
+    return (
+        <div className="p-4 md:p-6">
+            <div className="border border-gray-200 bg-white rounded-3xl flex flex-wrap">
+                <div className="w-full md:w-1/2 lg:w-1/4 py-8">
+                    <div className="md:border-r border-gray-200 px-12">
+                        <p className="text-gray-600 mb-2 text-center">CSE</p>
+                        <h2 className="text-4xl lg:text-5xl font-semibold text-center">150+</h2>
+                    </div>
+                </div>
+                <div className="w-full md:w-1/2 lg:w-1/4 py-8">
+                    <div className="lg:border-r border-gray-200 px-12">
+                        <p className="text-gray-600 mb-2 text-center">MECH</p>
+                        <h2 className="text-4xl lg:text-5xl font-semibold text-center">10+</h2>
+                    </div>
+                </div>
+                <div className="w-full md:w-1/2 lg:w-1/4 py-8">
+                    <div className="md:border-r border-gray-200 px-12">
+                        <p className="text-gray-600 mb-2 text-center">E&TC</p>
+                        <h2 className="text-4xl lg:text-5xl font-semibold text-center">50+</h2>
+                    </div>
+                </div>
+                <div className="w-full md:w-1/2 lg:w-1/4 py-8">
+                    <div className="px-12">
+                        <p className="text-gray-600 mb-2 text-center">Civil</p>
+                        <h2 className="text-4xl lg:text-5xl font-semibold text-center">30+</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}

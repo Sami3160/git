@@ -41,7 +41,7 @@ function App() {
           <NavbarWithSteroids />
 
           <Routes >
-            <Route path="/" element={<Home />} errorElement={<div>Not Found..huihiuii</div>} />
+            <Route path="/" element={<Home />} />
             <Route path="/notes" element={<NotesArea />} errorElement={<div>Not Found..huihiuii</div>}>
               <Route path=":semId"  element={<SubSemisterArea />} >
                 <Route path=":subject" element={<SubSemisterArea />} />

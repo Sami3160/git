@@ -5,52 +5,15 @@ import { useState } from 'react';
 function Navbar() {
 
     return (
-        // <div className='navbar'>
-
-        //     <div className=" sticky w-[100%] md:w-[90%] lg:w-[80%] flex flex-col mx-auto">
-        //         <div className="grid grid-cols-3 justify-center items-center">
-        //             <div className="logo col-span-3 sm:col-span-1 lg:text-4xl p-3 md:p-6 my-7 sm:my-0 ">
-        //                 <NavLink to={'/'}>
-        //                     GIT-Study Material
-        //                 </NavLink>
-        //             </div>
-        //             <ul className="col-span-2 hidden  list-none sm:flex flex-row text-sm md:text-lg space-x-0 md:space-x-1 lg:space-x-8 opacity-1 md:opacity-1 justify-center items-center text-grey-800">
-        //                 <li className="link cursor-pointer ">
-        //                     <NavLink to={'/notes'} className="p-3 w-full ">
-        //                         Visit Notes
-        //                     </NavLink>
-        //                 </li>
-        //                 <li className="link cursor-pointer ">
-        //                     <NavLink to={'/upload'} className="p-3">
-
-        //                         Upload Notes
-        //                     </NavLink>
-        //                 </li>
-        //                 <li className="adm text-white bg-black cursor-pointer ">
-        //                     <NavLink to={'/admin'} className="p-3">
-
-        //                         Admin Login
-        //                     </NavLink>
-        //                 </li>
-        //                 <li className="link cursor-pointer">
-        //                     <NavLink to={''} className="p-3">
-
-        //                         About us
-        //                     </NavLink>
-        //                 </li>
-        //             </ul>
-        //         </div>
-        //     </div>
-        // </div>
-
-        <Navbar2/>
+        // <Navbar2 />
+        <Navbar3 />
     )
 }
 
 
-function Navbar2(){
+function Navbar2() {
     const [modal, showModal] = useState(false);
-    
+
     return (
 
 
@@ -60,23 +23,17 @@ function Navbar2(){
                     <img src={GIT} className="h-8 rounded-full shadow-md" alt="Flowbite Logo" />
                     <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">GIT-Study Material</span>
                 </NavLink>
-                {/* <button data-collapse-toggle="navbar-default" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
-                    <span className="sr-only">Open main menu</span>
-                    <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15" />
-                    </svg>
-                </button> */}
                 <div className="hidden w-full md:block md:w-auto" id="navbar-default">
                     <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                         <li>
                             <NavLink to="/" className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Home</NavLink>
                         </li>
-                        <li onMouseEnter={()=>showModal(true)} className='relative'
-                            onMouseLeave={()=>showModal(false)}
-                            >
+                        <li onMouseEnter={() => showModal(true)} className='relative'
+                            onMouseLeave={() => showModal(false)}
+                        >
                             {modal && (
                                 <div>
-                                    <ul className="absolute -top-[16px] z-20 left-0 w-48 p-4 mt-10 bg-white border border-gray-100 rounded-lg shadow-lg dark:bg-gray-800 dark:border-gray-700">
+                                    <ul className="absolute -top-[16px] z-30 left-0 w-48 p-4 mt-10 bg-white border border-gray-100 rounded-lg shadow-lg dark:bg-gray-800 dark:border-gray-700">
                                         <li>
                                             <NavLink to="/notes?sub=cse" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">CSE</NavLink>
                                         </li>
@@ -111,8 +68,52 @@ function Navbar2(){
     );
 }
 
-// export { Navbar2, Navbar };
+function Navbar3() {
+    const [modal, showModal] = useState(false);
+    return (
+        <div className="fixed hidden w-[60%] left-1/2 transform -translate-x-1/2 z-30 md:grid xl:grid-cols-1 grid-cols-1">
+            <div className="p-5">
+                <div className="py-3 px-3 rounded-full border w-full bg-white border-indigo-500 shadow-lg text-black">
+                    <div className="flex justify-between items-center">
+                        
+                            <NavLink to={'/'}>
+                        <div className="flex justify-items-center items-center gap-2">
 
+                            <img src={GIT} className="h-8 rounded-full shadow-md" alt="Flowbite Logo" />
+                            <p className="text-2xl font-extrabold text-indigo-950">GIT</p>
+                        </div>
+                            </NavLink>
+                        <div className="flex text-black justify-items-center items-center gap-8 mr-10">
+                            <NavLink to="/" className="rounded hover:bg-gray-100  md:border-0 md:hover:text-blue-700 md:p-0 dark:text-indigo-900 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent " aria-current="page">Home</NavLink>
+                            <NavLink to="/notes?sub=cse" className="rounded relative hover:bg-gray-100  md:border-0 md:hover:text-blue-700 md:p-0 dark:text-indigo-900 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent " aria-current="page"
+                                onMouseEnter={() => showModal(true)}
+                                onMouseLeave={() => showModal(false)}
+                            >
+                                Notes
+                                {
+                                    modal && (
+                                        <div className="absolute pt-6">
+                                            <div className=' z-30 -ml-2 left-0 w-48 p-4 rounded-md bg-white text-indigo-900 shadow-2xl'>
+                                                <NavLink to="/notes?sub=cse" className="block py-2 px-3  rounded  md:border-0  md:p-0  hover:text-blue-500 ">Computer Science</NavLink>
+                                                <NavLink to="/notes?sub=mech" className="block py-2 px-3  rounded  md:border-0  md:p-0  hover:text-blue-500 ">Mechanical</NavLink>
+                                                <NavLink to="/notes?sub=entc" className="block py-2 px-3  rounded  md:border-0  md:p-0  hover:text-blue-500 ">E & TC</NavLink>
+                                                <NavLink to="/notes?sub=civil" className="block py-2 px-3  rounded  md:border-0  md:p-0  hover:text-blue-500 ">Civil</NavLink>
+                                            </div>
+                                        </div>
+                                    )
+                                }
+                            </NavLink>
+                            <NavLink to="/upload" className="block py-2 px-3  rounded hover:bg-gray-100  md:border-0 md:hover:text-blue-700 md:p-0 dark:text-indigo-900 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Request Upload</NavLink>
+                            <NavLink to="/admin" className="block py-2 px-3  rounded hover:bg-gray-100   md:border-0 md:hover:text-blue-700 md:p-0 dark:text-indigo-900 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Admin</NavLink>
+                            <NavLink to="/about" className="block py-2 px-3  rounded hover:bg-gray-100   md:border-0 md:hover:text-blue-700 md:p-0 dark:text-indigo-900 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">About Us</NavLink>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div >
+    )
+}
 
 
 export default Navbar;
