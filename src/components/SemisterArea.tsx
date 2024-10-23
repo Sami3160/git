@@ -102,21 +102,6 @@ const SemisterArea = () => {
                         <FontAwesomeIcon icon={faArrowCircleLeft} className="h-6 w-6" />
                     </div>
                     <div className="data p-4 ">
-
-                        {/* {subjectsArea
-                                ? subjectsArea.length > 0
-                                    ? subjectsArea.map((subject: Subject, index: number) => {
-                                        if (typeof subject === 'object' && subject !== null) {
-                                            return (
-                                                <Suspense key={index} fallback={<CardLoading />}>
-                                                    <Subject {...subject} />
-                                                </Suspense>
-                                            )
-                                        }
-                                    })
-                                    : <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2  -translate-y-1/2  text-3xl text-slate-600 w-[100%]'>No subjects</div>
-                                : <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2  -translate-y-1/2 text-3xl  text-slate-600 '>Select something</div>
-                            } */}
                         {!param.semId && <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2  -translate-y-1/2 text-3xl  text-slate-600 '>Select something</div>}
                         <Outlet/>
                     </div>

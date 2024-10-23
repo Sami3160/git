@@ -53,7 +53,7 @@ export const dynamicSem3State = selectorFamily({
                 break;
             case 'civil':
                 return [
-                    { name: "Maths", totalC: 0, questionC: 11, notesC: 6, onlineRefC: 0 },
+                    { name: "Maths1", totalC: 0, questionC: 11, notesC: 6, onlineRefC: 0 },
                     { name: "Science", totalC: 0, questionC: 11, notesC: 6, onlineRefC: 0 },
                     { name: "Computer Pheripherals", totalC: 0, questionC: 11, notesC: 6, onlineRefC: 0 },
                     { name: "Chemistry", totalC: 0, questionC: 11, notesC: 6, onlineRefC: 0 },

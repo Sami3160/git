@@ -39,9 +39,13 @@ const AdminDashboard: React.FC<AdminDashboardProps> = () => {
             if (email !== expectedEmail || expiryDate < new Date()) {
 
                 // The token is invalid or expired
+                console.log("jello expired");
+                
                 navigate("/login")
             }
         } else {
+            console.log("wtf happened");
+
             navigate("/login")
         }
 
@@ -66,7 +70,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = () => {
             })
     }
     return (
-        <div className="mx-20">
+        <div className="mx-20 pt-14">
             <p className="text-6xl font-extrabold  my-10 ">Welcome to Dashboard</p>
             <p className="text-xl font-normal  text-slate-800">Available Notes Content</p>
             <VisitStats />

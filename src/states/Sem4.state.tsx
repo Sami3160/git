@@ -33,7 +33,7 @@ export const dynamicSem4State = selectorFamily({
                 break;
             case 'mech':
                 return [
-                    { name: "Maths", totalC: 0, questionC: 11, notesC: 6, onlineRefC: 0 },
+                    { name: "Matus", totalC: 0, questionC: 11, notesC: 6, onlineRefC: 0 },
                     { name: "Science", totalC: 0, questionC: 11, notesC: 6, onlineRefC: 0 },
                     { name: "Computer Pheripherals", totalC: 0, questionC: 11, notesC: 6, onlineRefC: 0 },
                     { name: "Chemistry", totalC: 0, questionC: 11, notesC: 6, onlineRefC: 0 },

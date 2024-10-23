@@ -19,17 +19,7 @@ const SignupForm=lazy(()=>import('./pages/SignupForm'))
 const AdminDashboard=lazy(()=>import('./pages/AdminDashboard'))
 function App() {
 
-  // const routes: RouteObject[] = [
-  //   {
-  //     path: '/',
-  //     element: <Home />,
-  //     errorElement: <div>Not Found..huihiuii</div>
-  //   },
-  //   {
-  //     path: '/notes',
-  //     element: <NotesArea />
-  //   }
-  // ]
+ 
 
   return (
 

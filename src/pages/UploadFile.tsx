@@ -1,23 +1,17 @@
-import React, {  useEffect, useRef, useState } from 'react';
-import { sem3State } from '../states/Sem3.state';
-import { sem4State } from '../states/Sem4.state';
-import { sem5State } from '../states/Sem5.state';
-import { sem6State } from '../states/Sem6.state';
-import { sem7State } from '../states/Sem7.state';
-import { sem8State } from '../states/Sem8.state';
+import React, { useEffect, useRef, useState } from 'react';
+import { dynamicSem3State, sem3State } from '../states/Sem3.state';
+import { dynamicSem4State, sem4State } from '../states/Sem4.state';
+import { dynamicSem5State, sem5State } from '../states/Sem5.state';
+import { dynamicSem6State, sem6State } from '../states/Sem6.state';
+import { dynamicSem7State, sem7State } from '../states/Sem7.state';
+import { dynamicSem8State, sem8State } from '../states/Sem8.state';
 import { storage } from '../config/firebase.config';
 import { ref, uploadBytes } from 'firebase/storage';
-import { useRecoilState } from 'recoil';
-import {  useNavigate } from 'react-router-dom';
-// interface Subject {
-//     name: string;
-//     totalC: number;
-//     questionC: number;
-//     notesC: number;
-//     onlineRefC: number;
-// }
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { useNavigate } from 'react-router-dom';
 function UploadFile() {
     const btn = useRef<HTMLButtonElement>(null);
+    const [loading, setLoading] = useState<boolean>(false);
     const navigate = useNavigate();
     const token: any = localStorage.getItem("user")
     useEffect(() => {
@@ -47,20 +41,22 @@ function UploadFile() {
     const type = useRef<HTMLSelectElement>(null);
     const subname = useRef<HTMLSelectElement>(null);
 
-    const sem3 = useRecoilState(sem3State);
-    const sem4 = useRecoilState(sem4State);
-    const sem5 = useRecoilState(sem5State);
-    const sem6 = useRecoilState(sem6State);
-    const sem7 = useRecoilState(sem7State);
-    const sem8 = useRecoilState(sem8State);
 
+    let sem3: any = useRecoilValue(dynamicSem3State(dept.current?.value));;
+    let sem4: any = useRecoilValue(dynamicSem4State(dept.current?.value));;
+    let sem5: any = useRecoilValue(dynamicSem5State(dept.current?.value));;
+    let sem6: any = useRecoilValue(dynamicSem6State(dept.current?.value));;
+    let sem7: any = useRecoilValue(dynamicSem7State(dept.current?.value));;
+    let sem8: any = useRecoilValue(dynamicSem8State(dept.current?.value));;
 
     const handleFileChange = (e: any) => {
         setFile(e.target.files[0]);
+
     };
 
     const handleUpload = () => {
         btn.current?.setAttribute('disabled', 'true');
+        setLoading(true)
         btn.current?.classList.add('bg-gray-200');
         btn.current?.classList.add('cursor-not-allowed');
 
@@ -73,6 +69,7 @@ function UploadFile() {
                 setInvalid(false);
             }, 3000);
             setInvalid(true);
+            setLoading(false)
             return;
         }
         if (file) {
@@ -82,14 +79,26 @@ function UploadFile() {
                 btn.current?.classList.remove('bg-gray-200');
                 btn.current?.classList.remove('cursor-not-allowed');
                 btn.current?.removeAttribute('disabled');
+                setLoading(false)
+                alert("File Uploaded Successfully")
+
 
             }).catch((err) => {
                 console.log(err);
                 btn.current?.classList.remove('bg-gray-200');
                 btn.current?.classList.remove('cursor-not-allowed');
                 btn.current?.removeAttribute('disabled');
+                alert("Error encountered: ",err.message)
+                setLoading(false)
+
+
             });
         }
+        btn.current?.classList.remove('bg-gray-200');
+        btn.current?.classList.remove('cursor-not-allowed');
+        btn.current?.removeAttribute('disabled');
+        setLoading(false)
+
     }
     return (
         <div className='relative'>
@@ -104,10 +113,11 @@ function UploadFile() {
 
                     <div className="dept col-span-1  bg-blue-100 h-fit " >
                         <select name="department" id="" className='bg-blue-100 p-4 cursor-pointer w-full' ref={dept}>
-                            <option value="default" >Select Department</option>
-                            <option value="CSE">CSE</option>
-                            <option value="E & TC">E & TC</option>
-                            <option value="AI ML">AI/ML</option>
+                            <option value="cse" >Select Department</option>
+                            <option value="cse">CSE</option>
+                            <option value="entc">E & TC</option>
+                            <option value="mech">Mech</option>
+                            <option value="civil">Civil</option>
                         </select>
                     </div>
 
@@ -121,17 +131,17 @@ function UploadFile() {
                                     setSubjects([{ name: "No Semester Selected" }]);
                                 }
                                 if (e.target?.value === "Semester 3") {
-                                    setSubjects(sem3[0]);
+                                    setSubjects(sem3);
                                 } else if (e.target?.value === "Semester 4") {
-                                    setSubjects(sem4[0]);
+                                    setSubjects(sem4);
                                 } else if (e.target?.value === "Semester 5") {
-                                    setSubjects(sem5[0]);
+                                    setSubjects(sem5);
                                 } else if (e.target?.value === "Semester 6") {
-                                    setSubjects(sem6[0]);
+                                    setSubjects(sem6);
                                 } else if (e.target?.value === "Semester 7") {
-                                    setSubjects(sem7[0]);
+                                    setSubjects(sem7);
                                 } else if (e.target?.value === "Semester 8") {
-                                    setSubjects(sem8[0]);
+                                    setSubjects(sem8);
                                 } else {
                                     setSubjects([{ name: "No Semester Selected" }]);
                                 }
@@ -179,7 +189,7 @@ function UploadFile() {
                         <input type="file" onChange={handleFileChange} className="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-gray-400 file:border-0 file:bg-transparent file:text-gray-600 file:text-sm file:font-medium" />
                     </div>
 
-                    <button onClick={handleUpload} ref={btn} className='bg-green-100 p-2 rounded-md px-5 h-fit shadow-lg'>Upload</button>
+                    <button onClick={handleUpload} ref={btn} className='bg-green-100 p-2 rounded-md px-5 h-fit shadow-lg'>{loading?"Uploading...":"Upload"}</button>
                 </div>
             </div>
         </div>
