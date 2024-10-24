@@ -12,6 +12,7 @@ import { lazy,  useState } from "react";
 import { useRecoilValue } from "recoil";
 import { storage } from '../config/firebase.config';
 import { ref, listAll, getDownloadURL } from "firebase/storage";
+import LoginForm from "../pages/LoginForm";
 
 const Subject = lazy(() => import("./Subject"));
 
@@ -67,8 +68,16 @@ function SubSemisterArea() {
         "Sem-VIII": "Semester 8"
     }
     const { semId, subject } = useParams();
-    // console.log(semId, subject);
 
+    console.log(sub)
+    const submap={
+        "cse":"CSE",
+        "entc":"E & TC",
+        "mech":"Mech",
+        "civil":"Civil"
+    }
+
+    
     useEffect(() => {
         const fetchFiles = async () => {
             setDocumentsNotes(undefined)
@@ -77,12 +86,14 @@ function SubSemisterArea() {
             setQuestionBanks(undefined)
             setSyllabus(undefined)
             setSkeleton(true)
+            console.log("fetching files", semId, subject);
+            
             if (semId && subject) {
-                const DocumentsNotesRef = ref(storage, `Department Notes/${sub.toUpperCase()}/${semFolderRef[semId]}/${subject}/Documents Notes/`);
-                const QuestionBanksRef = ref(storage, `Department Notes/${sub.toUpperCase()}/${semFolderRef[semId]}/${subject}/Question Banks/`);
-                const RecommendedBooksRef = ref(storage, `Department Notes/${sub.toUpperCase()}/${semFolderRef[semId]}/${subject}/Recommended Books/`)
-                const ReferenceBooksRef = ref(storage, `Department Notes/${sub.toUpperCase()}/${semFolderRef[semId]}/${subject}/Reference Books/`)
-                const SyllabusRef = ref(storage, `Department Notes/${sub.toUpperCase()}/${semFolderRef[semId]}/${subject}/Syllabus/`)
+                const DocumentsNotesRef = ref(storage, `Department Notes/${submap[sub]}/${semFolderRef[semId]}/${subject}/Documents Notes/`);
+                const QuestionBanksRef = ref(storage, `Department Notes/${submap[sub]}/${semFolderRef[semId]}/${subject}/Question Banks/`);
+                const RecommendedBooksRef = ref(storage, `Department Notes/${submap[sub]}/${semFolderRef[semId]}/${subject}/Recommended Books/`)
+                const ReferenceBooksRef = ref(storage, `Department Notes/${submap[sub]}/${semFolderRef[semId]}/${subject}/Reference Books/`)
+                const SyllabusRef = ref(storage, `Department Notes/${submap[sub]}/${semFolderRef[semId]}/${subject}/Syllabus/`)
                 const res1 = await listAll(DocumentsNotesRef);
                 const Docres = await Promise.all(
                     res1.items.map(async item => {
