@@ -40,14 +40,20 @@ function UploadFile() {
     const dept = useRef<HTMLSelectElement>(null);
     const type = useRef<HTMLSelectElement>(null);
     const subname = useRef<HTMLSelectElement>(null);
+    const submap={
+        "CSE":"cse",
+        "E & TC":"entc",
+        "Mech":"mech",
+        "Civil":"civil"
+    }
 
 
-    let sem3: any = useRecoilValue(dynamicSem3State(dept.current?.value));;
-    let sem4: any = useRecoilValue(dynamicSem4State(dept.current?.value));;
-    let sem5: any = useRecoilValue(dynamicSem5State(dept.current?.value));;
-    let sem6: any = useRecoilValue(dynamicSem6State(dept.current?.value));;
-    let sem7: any = useRecoilValue(dynamicSem7State(dept.current?.value));;
-    let sem8: any = useRecoilValue(dynamicSem8State(dept.current?.value));;
+    let sem3: any = useRecoilValue(dynamicSem3State(submap[dept.current?.value]));;
+    let sem4: any = useRecoilValue(dynamicSem4State(submap[dept.current?.value]));;
+    let sem5: any = useRecoilValue(dynamicSem5State(submap[dept.current?.value]));;
+    let sem6: any = useRecoilValue(dynamicSem6State(submap[dept.current?.value]));;
+    let sem7: any = useRecoilValue(dynamicSem7State(submap[dept.current?.value]));;
+    let sem8: any = useRecoilValue(dynamicSem8State(submap[dept.current?.value]));;
 
     const handleFileChange = (e: any) => {
         setFile(e.target.files[0]);
@@ -55,10 +61,10 @@ function UploadFile() {
     };
 
     const handleUpload = () => {
-        btn.current?.setAttribute('disabled', 'true');
+        // btn.current?.setAttribute('disabled', 'true');
         setLoading(true)
-        btn.current?.classList.add('bg-gray-200');
-        btn.current?.classList.add('cursor-not-allowed');
+        // btn.current?.classList.add('bg-gray-200');
+        // btn.current?.classList.add('cursor-not-allowed');
 
         const semName = sem.current?.value
         const deptName = dept.current?.value
@@ -113,11 +119,11 @@ function UploadFile() {
 
                     <div className="dept col-span-1  bg-blue-100 h-fit " >
                         <select name="department" id="" className='bg-blue-100 p-4 cursor-pointer w-full' ref={dept}>
-                            <option value="cse" >Select Department</option>
-                            <option value="cse">CSE</option>
-                            <option value="entc">E & TC</option>
-                            <option value="mech">Mech</option>
-                            <option value="civil">Civil</option>
+                            <option value="CSE" >Select Department</option>
+                            <option value="CSE">CSE</option>
+                            <option value="E & TC">E & TC</option>
+                            <option value="Mech">Mech</option>
+                            <option value="Civil">Civil</option>
                         </select>
                     </div>
 
