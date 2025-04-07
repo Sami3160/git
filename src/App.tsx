@@ -15,7 +15,7 @@ const NavbarWithSteroids = lazy(() => import('./components/BottomNavbar'))
 const UploadFile = lazy(() => import('./pages/UploadFile'));
 const SubSemisterArea = lazy(() => import('./components/SubSemisterArea'));
 const LoginForm=lazy(()=>import('./pages/LoginForm'))
-// const SignupForm=lazy(()=>import('./pages/SignupForm'))
+const SignupForm=lazy(()=>import('./pages/SignupForm'))
 const AdminDashboard=lazy(()=>import('./pages/AdminDashboard'))
 function App() {
 
@@ -49,7 +49,7 @@ function App() {
             </Route>
             <Route path="/upload" element={<UploadFile />} />
             <Route path="/login" element={<LoginForm />} />
-            {/* <Route path="/signup" element={<SignupForm />} /> */}
+            <Route path="/signup" element={<SignupForm />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="*" element={<ErrorPage/>} />
