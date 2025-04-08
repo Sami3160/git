@@ -27,6 +27,7 @@ const SignupForm: React.FC = () => {
   const navigate = useNavigate();
   // email s username....
   const [fname, setFname] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
   const [lname, setLname] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
@@ -42,6 +43,7 @@ const SignupForm: React.FC = () => {
   }, []);
 
   const handleSignUp = async () => {
+    setLoading(true);
     let validUser = [];
     const email = username.trim();
 
@@ -55,6 +57,8 @@ const SignupForm: React.FC = () => {
       console.log("password mismatch");
       setInvalid("Passwords do not match!");
       setTimeout(() => setInvalid(""), 3000);
+      setLoading(false);
+
       return;
     }
     console.log("check 1 done");
@@ -62,6 +66,8 @@ const SignupForm: React.FC = () => {
       console.log("password length issue");
       setInvalid("Passwords Should be more than 6 characters!");
       setTimeout(() => setInvalid(""), 3000);
+      setLoading(false);
+
       return;
     }
     console.log("check 2 done");
@@ -74,6 +80,8 @@ const SignupForm: React.FC = () => {
     ) {
       setInvalid("Fill all fields!");
       setTimeout(() => setInvalid(""), 3000);
+      setLoading(false);
+
       // usr.current?.classList.add("")
     } else {
       console.log("check 3 done");
@@ -81,7 +89,6 @@ const SignupForm: React.FC = () => {
       console.log("all validation check done");
       try {
         const users = collection(db, "users");
-        const querySnapshot = await getDocs(users);
         // const departmentNamesArray: any[] = [];
 
         // querySnapshot.forEach((doc) => {
@@ -97,30 +104,32 @@ const SignupForm: React.FC = () => {
           .then((userCredentials) => {
             const user = userCredentials.user;
             console.log(user);
-            const docRef: any = doc(db, "admins",user.uid);
+            const docRef: any = doc(db, "users", user.uid);
             const data: {
-              "first name": string;
-              "last name": string;
+              firstName: string;
+              lastName: string;
               email: string;
             } = {
-              "first name": fname,
-              "last name": lname,
+              firstName: fname,
+              lastName: lname,
               email: username,
             };
-            console.log(data);
+            // console.log(data);
             console.log("start data save");
             setDoc(docRef, data)
               .then((userCreds) => {
                 console.log("data save done");
                 // console.log(userCreds);
-                alert("Registration success")
+                alert("Registration success");
                 navigate("/");
                 setInvalid("");
+                setLoading(false);
               })
               .catch((err) => {
                 console.log("error", err);
                 setInvalid(err.message);
                 setTimeout(() => setInvalid(""), 3000);
+                setLoading(false);
               });
             return;
           })
@@ -128,6 +137,8 @@ const SignupForm: React.FC = () => {
             console.table("Error", err);
             setInvalid(err.message);
             setTimeout(() => setInvalid(""), 3000);
+            setLoading(false);
+
             return;
           });
 
@@ -142,6 +153,7 @@ const SignupForm: React.FC = () => {
         console.log(error);
         setInvalid(error.message);
         setTimeout(() => setInvalid(""), 3000);
+        setLoading(false);
       }
     }
   };
@@ -229,13 +241,21 @@ const SignupForm: React.FC = () => {
           Confirm Password
         </span>
       </label>
-
-      <button
-        onClick={handleSignUp}
-        className="w-full py-3 px-4 rounded-lg text-white text-base bg-blue-600 hover:bg-blue-700 transition"
-      >
-        Submit
-      </button>
+      {!loading ? (
+        <button
+          onClick={handleSignUp}
+          className="w-full py-3 px-4 rounded-lg text-white text-base bg-blue-600 hover:bg-blue-700 transition"
+        >
+          Submit
+        </button>
+      ) : (
+        <button
+        disabled
+        className="w-full cursor-not-allowed py-3 px-4 rounded-lg text-white text-base bg-blue-800 "
+        >
+          Submitting...
+        </button>
+      )}
 
       <p className="text-center text-sm text-gray-600">
         Already have an account?{" "}

@@ -16,68 +16,42 @@ const LoginForm: React.FC = () => {
     empty: "Please fill all fields.",
     invalid: "Invalid credentials.",
   };
-  const [username, setUsername] = useState("");
   const navigate = useNavigate();
   // email s username....
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [invalid, setInvalid] = useState<string>("");
-  const usr = useRef<HTMLInputElement>(null);
-  const passwd = useRef<HTMLInputElement>(null);
   useEffect(() => {
-    document.title = "Login";
-    // console.log()
+    document.title = "Login to GIT Notes";
   }, []);
 
   const handleLogin = async () => {
-    let validAdmin = [];
-    username.trim();
-    password.trim();
-    if (username.length == 0 || password.length == 0) {
-      setInvalid("empty");
+    console.log("init login");
+    const email = username.trim();
+    const passwd = password.trim();
+    if (email.length == 0 || passwd.length == 0) {
+      setInvalid("Fill all fields!!!");
       setTimeout(() => setInvalid(""), 2000);
-      // usr.current?.classList.add("")
     } else {
       try {
-        signInWithEmailAndPassword(auth, username, password)
+        console.log("Password check done");
+        signInWithEmailAndPassword(auth, email, passwd)
           .then((userCredentials) => {
             const user = userCredentials.user;
-            navigate("/admin");
+            console.log("all done");
+            alert("all verification done");
+            navigate("/");
             setInvalid("");
           })
           .catch((error) => {
-            console.log(error)
-            setInvalid("invalid");
+            console.log(error);
+            setInvalid(error.message);
             setTimeout(() => setInvalid(""), 2000);
           });
-        // const admins = collection(db, "admins");
-        // const querySnapshot = await getDocs(admins);
-        // // const departmentNamesArray: any[] = [];
-        // querySnapshot.forEach((doc) => {
-        //   console.log(doc.data());
-        //   if (
-        //     doc.data().email === username &&
-        //     doc.data().password === password
-        //   ) {
-        //     validAdmin.push(doc.data());
-        //   }
-        // });
-
-        // if (validAdmin.length == 0) {
-        //   setInvalid("invalid");
-        //   setTimeout(() => setInvalid(""), 2000);
-        // } else {
-        //   const expiryDate = new Date();
-        //   expiryDate.setHours(expiryDate.getHours() + 1);
-
-        //   const newtoken = `${username}_${expiryDate.getTime()}`;
-
-        //   localStorage.setItem("user", newtoken);
-        //   localStorage.setItem("email", username);
-        //   navigate("/admin");
-        //   setInvalid("");
-        // }
-      } catch (error) {
+      } catch (error: any) {
         console.log(error);
+        setInvalid(error.message);
+        setTimeout(() => setInvalid(""), 2000);
       }
     }
   };
@@ -102,8 +76,6 @@ const LoginForm: React.FC = () => {
             type="text"
             className="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 pl-10"
             placeholder="Enter your email"
-            value={username}
-            ref={usr}
             onChange={(e) => setUsername(e.target.value)}
           />
 
@@ -122,9 +94,7 @@ const LoginForm: React.FC = () => {
             type="password"
             className="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 pl-10"
             placeholder="Enter your password"
-            value={password}
             onChange={(e) => setPassword(e.target.value)}
-            ref={passwd}
           />
           <span className="absolute left-3 top-1/2 transform -translate-y-1/2">
             <FontAwesomeIcon icon={faLock} className="h-6 w-6" />
@@ -139,12 +109,7 @@ const LoginForm: React.FC = () => {
           </NavLink>
         </p>
       </div>
-      {invalid == "invalid" ? (
-        <p className="text-red-500 p-2">{Errors.invalid}</p>
-      ) : null}
-      {invalid == "empty" ? (
-        <p className="text-red-500 p-2">{Errors.invalid}</p>
-      ) : null}
+      {invalid.length > 0 && <p className="text-red-500 p-2">{invalid}</p>}
 
       <button
         onClick={handleLogin}
