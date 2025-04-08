@@ -46,6 +46,12 @@ function SubSemisterArea() {
         notesC: number;
         onlineRefC: number;
     }
+    const subMap:Record<string,string>={
+        "cse":"CSE",
+        "mech":"MECHANICAL",
+        "entc":"E & TC",
+        "civil":"CIVIL",
+    }
     const semDatRef: Record<string, typeof sem3> = {
         "Sem-I": sem1,
         "Sem-II": sem2,
@@ -68,6 +74,7 @@ function SubSemisterArea() {
     }
     const { semId, subject } = useParams();
     // console.log(semId, subject);
+    console.log(semId, subject)
 
     useEffect(() => {
         const fetchFiles = async () => {
@@ -78,11 +85,11 @@ function SubSemisterArea() {
             setSyllabus(undefined)
             setSkeleton(true)
             if (semId && subject) {
-                const DocumentsNotesRef = ref(storage, `Department Notes/${sub.toUpperCase()}/${semFolderRef[semId]}/${subject}/Documents Notes/`);
-                const QuestionBanksRef = ref(storage, `Department Notes/${sub.toUpperCase()}/${semFolderRef[semId]}/${subject}/Question Banks/`);
-                const RecommendedBooksRef = ref(storage, `Department Notes/${sub.toUpperCase()}/${semFolderRef[semId]}/${subject}/Recommended Books/`)
-                const ReferenceBooksRef = ref(storage, `Department Notes/${sub.toUpperCase()}/${semFolderRef[semId]}/${subject}/Reference Books/`)
-                const SyllabusRef = ref(storage, `Department Notes/${sub.toUpperCase()}/${semFolderRef[semId]}/${subject}/Syllabus/`)
+                const DocumentsNotesRef = ref(storage, `Department Notes/${subMap[sub]}/${semFolderRef[semId]}/${subject}/Documents Notes/`);
+                const QuestionBanksRef = ref(storage, `Department Notes/${subMap[sub]}/${semFolderRef[semId]}/${subject}/Question Banks/`);
+                const RecommendedBooksRef = ref(storage, `Department Notes/${subMap[sub]}/${semFolderRef[semId]}/${subject}/Recommended Books/`)
+                const ReferenceBooksRef = ref(storage, `Department Notes/${subMap[sub]}/${semFolderRef[semId]}/${subject}/Reference Books/`)
+                const SyllabusRef = ref(storage, `Department Notes/${subMap[sub]}/${semFolderRef[semId]}/${subject}/Syllabus/`)
                 const res1 = await listAll(DocumentsNotesRef);
                 const Docres = await Promise.all(
                     res1.items.map(async item => {
@@ -127,11 +134,9 @@ function SubSemisterArea() {
             setSkeleton(false)
         }
         try {
-
             fetchFiles();
         } catch (error) {
             console.log(error);
-
         }
         // console.log(documentsNotes);
 
@@ -161,15 +166,17 @@ function SubSemisterArea() {
                 subject && referenceBooks ? referenceBooks.map((item: any, index: number) => {
                     return (
                         <div key={index} className="card bg-white p-2 rounded-lg shadow-2xl ">
-                            <div className="title text-2xl font-bold">{item.name}</div>
+                            <div className="title text-2xl font-bold">{item?.name}</div>
                             <div className="h-1 w-full bg-slate-400 "></div>
                             <div className="list-none flex flex-col my-2 p-2 shadow-inner rounded-md bg-slate-200">
                                 <div className="text-sm">Reference Book</div>
                                 <div className="text-sm">Total Books: {referenceBooks.length}</div>
                                 <div className="text-sm">Available Notes: {referenceBooks.length}</div>
                             </div>
-                            <a href={item.url}></a>
+                            <a href={item.url}>
+
                             <div className="content text-lg cursor-pointer text-center">Download Doc</div>
+                            </a>
                         </div>
                     )
                 }) : ""
@@ -178,7 +185,7 @@ function SubSemisterArea() {
                 subject && documentsNotes ? documentsNotes.map((item: any, index: number) => {
                     return (
                         <div key={index} className="card bg-white p-2 rounded-lg shadow-2xl ">
-                            <div className="title text-2xl font-bold">{item.name}</div>
+                            <div className="title text-2xl font-bold">{item?.name}</div>
                             <div className="h-1 w-full bg-slate-400 "></div>
                             <div className="list-none flex flex-col my-2 p-2 shadow-inner rounded-md bg-slate-200">
                                 <div className="text-sm">Document Notes</div>
@@ -197,7 +204,7 @@ function SubSemisterArea() {
                 subject && recommendedBooks ? recommendedBooks.map((item: any, index: number) => {
                     return (
                         <div key={index} className="card bg-white p-2 rounded-lg shadow-2xl ">
-                            <div className="title text-2xl font-bold">{item}</div>
+                            <div className="title text-2xl font-bold">{item?.name}</div>
                             <div className="h-1 w-full bg-slate-400 "></div>
                             <div className="list-none flex flex-col my-2 p-2 shadow-inner rounded-md bg-slate-200">
                             <div className="text-sm">Recommended Books</div>
@@ -205,7 +212,10 @@ function SubSemisterArea() {
                                 <div className="text-sm">Total Docs: {documentsNotes.length}</div>
                                 <div className="text-sm">Available Notes: {documentsNotes.length}</div>
                             </div>
-                            <div className="content text-lg cursor-pointer text-center">Download Doc</div>
+                            <a href={item.url} target="_blank" >
+
+                                <div className="content text-lg cursor-pointer text-center">Download Doc</div>
+                            </a>
                         </div>
                     )
                 }) : ""
@@ -215,14 +225,17 @@ function SubSemisterArea() {
                 subject && questionBanks ? questionBanks.map((item: any, index: number) => {
                     return (
                         <div key={index} className="card bg-white p-2 rounded-lg shadow-2xl ">
-                            <div className="title text-2xl font-bold">{item}</div>
+                            <div className="title text-2xl font-bold">{item?.name}</div>
                             <div className="h-1 w-full bg-slate-400 "></div>
                             <div className="list-none flex flex-col my-2 p-2 shadow-inner rounded-md bg-slate-200">
                             <div className="text-sm">Question Bank</div>
                                 <div className="text-sm">Total Docs: {documentsNotes.length}</div>
                                 <div className="text-sm">Available Notes: {documentsNotes.length}</div>
                             </div>
-                            <div className="content text-lg cursor-pointer text-center">Download Doc</div>
+                            <a href={item.url} target="_blank" >
+
+                                <div className="content text-lg cursor-pointer text-center">Download Doc</div>
+                            </a>
                         </div>
                     )
                 }) : ""
@@ -232,14 +245,17 @@ function SubSemisterArea() {
                 subject && syllabus && syllabus.map((item: any, index: number) => {
                     return (
                         <div key={index} className="card bg-white p-2 rounded-lg shadow-2xl ">
-                            <div className="title text-2xl font-bold">{item}</div>
+                            <div className="title text-2xl font-bold">{item?.name}</div>
                             <div className="h-1 w-full bg-slate-400 "></div>
                             <div className="list-none flex flex-col my-2 p-2 shadow-inner rounded-md bg-slate-200">
                             <div className="text-sm">Syllabus</div>
                                 <div className="text-sm">Total Docs: {documentsNotes.length}</div>
                                 <div className="text-sm">Available Notes: {documentsNotes.length}</div>
                             </div>
-                            <div className="content text-lg cursor-pointer text-center">Download Doc</div>
+                            <a href={item.url} target="_blank" >
+
+                                <div className="content text-lg cursor-pointer text-center">Download Doc</div>
+                            </a>
                         </div>
                     )
                 })
